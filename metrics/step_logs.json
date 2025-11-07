@@ -1,0 +1,17 @@
+[
+  {
+    "timestamp": "2025-11-07T08:11:40.156343",
+    "step": "start_orchestration",
+    "message": "Received issue: Crash on login screen"
+  },
+  {
+    "timestamp": "2025-11-07T08:11:40.157340",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-07T08:11:40.157340",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  }
+]
