@@ -1,12 +1,39 @@
-from fastapi import FastAPI, HTTPException
+import os
+import json
+
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi.middleware.cors import CORSMiddleware
+
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
+
 from packages.tools.mock_tool import mock_classify_issue
 from packages.agents.reliability import log_step
+from packages.ws.manager import manager as ws_manager
 from packages.tools import http_fetcher, vector_store, executor
 from packages.eval import harness as eval_harness
 
-app = FastAPI(title="Issue Triage Orchestrator", version="0.4.0")
+app = FastAPI(title="Issue Triage Orchestrator", version="0.5.0")
+
+LOG_FILE = "metrics/step_logs.json"
+
+# --- CORS Configuration ---
+
+origins = [
+    # Allow the origin where your frontend (e.g., Next.js) is running
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    # Add any other specific origins your client might use (e.g., development staging)
+    # NOTE: You can also use "*" to allow ALL origins, but this is less secure
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins, # <--- 2. Specify allowed client domains/ports
+    allow_credentials=True, # Allow cookies/authentication headers
+    allow_methods=["*"], # Allow all standard HTTP methods (GET, POST, PUT, DELETE, etc.)
+    allow_headers=["*"], # Allow all headers (Content-Type, Authorization, etc.)
+)
 
 class OrchestratorState(BaseModel):
     repo_url: str
@@ -34,7 +61,8 @@ async def start_orchestration(state: OrchestratorState):
         # 2) fetch repo README (best-effort)
         readme_result = None
         try:
-            readme_url = state.repo_url.rstrip("/") + "/raw/main/README.md"
+            # readme_url = state.repo_url.rstrip("/") + "/raw/main/README.md"
+            readme_url = "https://github.com/n8n-io/n8n/blob/master/README.md"
             fetch_res = http_fetcher.fetch(readme_url)
             readme_text = fetch_res["text"][:10000]  # trim for safety
             readme_result = {"fetched": True, "from_cache": fetch_res["from_cache"], "len": len(readme_text)}
@@ -80,3 +108,57 @@ async def get_metrics():
     otherwise returns an empty dict.
     """
     return eval_harness.get_latest_metrics()
+
+@app.get("/logs")
+async def get_logs(tail: int = 200):
+    """
+    Return the last `tail` log entries from metrics/step_logs.json.
+    Useful for the UI to show a snapshot without WS.
+    """
+    if not os.path.exists(LOG_FILE):
+        return []
+    try:
+        with open(LOG_FILE, "r", encoding="utf-8") as f:
+            logs = json.load(f)
+    except Exception:
+        return []
+    # Return last `tail` entries
+    return logs[-tail:]
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket):
+    """
+    WebSocket endpoint that:
+      - accepts connection
+      - sends an initial snapshot message: { type: "snapshot", metrics: {...}, logs: [...] }
+      - then keeps connection open; new log lines are broadcast by WSManager
+    """
+    # Connect and register
+    await ws_manager.connect(websocket)
+    try:
+        # Send initial snapshot
+        metrics = eval_harness.get_latest_metrics()
+        # send tail of logs
+        logs = []
+        if os.path.exists(LOG_FILE):
+            try:
+                with open(LOG_FILE, "r", encoding="utf-8") as f:
+                    logs = json.load(f)
+            except Exception:
+                logs = []
+        initial_payload = {"type": "snapshot", "metrics": metrics, "log_lines": logs[-500:]}
+        await websocket.send_text(json.dumps(initial_payload))
+
+        # keep the connection alive; optionally accept client messages
+        while True:
+            try:
+                msg = await websocket.receive_text()
+            except WebSocketDisconnect:
+                break
+            except Exception:
+                # Any other receive error -> disconnect
+                break
+            # Optionally support subscribe messages in the future:
+            # ignore incoming messages for now
+    finally:
+        await ws_manager.disconnect(websocket)

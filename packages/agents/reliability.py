@@ -3,6 +3,7 @@ import json
 import os
 from functools import wraps
 from datetime import datetime
+from packages.ws.manager import notify_async
 
 # === Retry with exponential backoff ===
 def retry_with_backoff(retries=3, backoff_in_seconds=1):
@@ -61,11 +62,27 @@ def log_step(step_name, message):
         "step": step_name,
         "message": message,
     }
-    if os.path.exists(LOG_FILE):
-        with open(LOG_FILE, "r") as f:
-            logs = json.load(f)
-    else:
+    # read existing logs (defensive)
+    try:
+        if os.path.exists(LOG_FILE):
+            with open(LOG_FILE, "r", encoding="utf-8") as f:
+                logs = json.load(f)
+        else:
+            logs = []
+    except Exception:
         logs = []
+
     logs.append(log_entry)
-    with open(LOG_FILE, "w") as f:
-        json.dump(logs, f, indent=2)
+    try:
+        with open(LOG_FILE, "w", encoding="utf-8") as f:
+            json.dump(logs, f, indent=2)
+    except Exception:
+        # If write fails, swallow (we don't want logging failure to crash system)
+        pass
+
+    # --- NEW: notify any connected WebSocket clients about this new log line ---
+    try:
+        notify_async({"type": "log_line", "log_line": log_entry})
+    except Exception:
+        # best-effort only; do not raise
+        pass
