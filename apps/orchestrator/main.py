@@ -4,8 +4,9 @@ from typing import Optional
 from packages.tools.mock_tool import mock_classify_issue
 from packages.agents.reliability import log_step
 from packages.tools import http_fetcher, vector_store, executor
+from packages.eval import harness as eval_harness
 
-app = FastAPI(title="Issue Triage Orchestrator", version="0.3.0")
+app = FastAPI(title="Issue Triage Orchestrator", version="0.4.0")
 
 class OrchestratorState(BaseModel):
     repo_url: str
@@ -24,7 +25,7 @@ async def root():
 async def start_orchestration(state: OrchestratorState):
     try:
         log_step("start_orchestration", f"Received issue: {state.issue_text}")
-        
+
         # 1) classify severity
         severity = mock_classify_issue(state.issue_text)
         state.severity = severity
@@ -58,13 +59,24 @@ async def start_orchestration(state: OrchestratorState):
         log_step("start_orchestration", f"Executor check: {exec_check.get('message')}")
         state.status = "completed"
 
+        metrics = eval_harness.compute_metrics()
+
         return {
             "final_state": state.model_dump(),
             "readme_result": readme_result,
             "executor_check": exec_check,
+            "metrics": metrics,
             "message": "Run completed (dry-run)."
         }
 
     except Exception as e:
         log_step("start_orchestration", f"Error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/metrics")
+async def get_metrics():
+    """
+    Returns the latest persisted metrics.json (if available),
+    otherwise returns an empty dict.
+    """
+    return eval_harness.get_latest_metrics()
