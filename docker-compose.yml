@@ -1,0 +1,43 @@
+services:
+  orchestrator:
+    build:
+      context: .
+      dockerfile: apps/orchestrator/Dockerfile
+    command: poetry run uvicorn apps.orchestrator.main:app --host 0.0.0.0 --port 8000
+    image: issue-triage-orchestrator-orchestrator:latest
+    container_name: issue_triage_orchestrator
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+      - FASTAPI_HOST=0.0.0.0
+      - FASTAPI_PORT=8000
+    ports:
+      - "8000:8000"
+    volumes:
+      # KEEP these mounts
+      - ./metrics:/app/metrics
+      - ./packages/tools/_dry_prs:/app/packages/tools/_dry_prs
+      # CHANGE this mount to avoid overwriting the root directory (where pyproject.toml is)
+      # Instead, mount the app code to a specific subdirectory like /app/apps/orchestrator
+      - ./apps/orchestrator:/app/apps/orchestrator
+      # You might also need the full source code root mounted for imports (optional but recommended for dev):
+      - .:/app
+    restart: unless-stopped
+
+  web:
+    user: node
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    image: issue-triage-orchestrator-web:latest
+    container_name: issue_triage_web
+    env_file:
+      - .env
+    environment:
+      - NEXT_PUBLIC_API_URL=http://orchestrator:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - orchestrator
+    restart: unless-stopped
