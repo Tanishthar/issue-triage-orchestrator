@@ -1,0 +1,972 @@
+[
+  {
+    "timestamp": "2025-11-07T08:11:40.156343",
+    "step": "start_orchestration",
+    "message": "Received issue: Crash on login screen"
+  },
+  {
+    "timestamp": "2025-11-07T08:11:40.157340",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-07T08:11:40.157340",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T03:45:25.743292",
+    "step": "wrapped",
+    "message": "Attempt 1 failed: transient, retrying in 0s"
+  },
+  {
+    "timestamp": "2025-11-08T03:45:25.746678",
+    "step": "wrapped",
+    "message": "Attempt 2 failed: transient, retrying in 0s"
+  },
+  {
+    "timestamp": "2025-11-08T03:46:54.468344",
+    "step": "wrapped",
+    "message": "Attempt 1 failed: transient, retrying in 0s"
+  },
+  {
+    "timestamp": "2025-11-08T03:46:54.474828",
+    "step": "wrapped",
+    "message": "Attempt 2 failed: transient, retrying in 0s"
+  },
+  {
+    "timestamp": "2025-11-08T03:49:42.884035",
+    "step": "wrapped",
+    "message": "Attempt 1 failed: transient, retrying in 0s"
+  },
+  {
+    "timestamp": "2025-11-08T03:49:42.884491",
+    "step": "wrapped",
+    "message": "Attempt 2 failed: transient, retrying in 0s"
+  },
+  {
+    "timestamp": "2025-11-08T03:56:39.136894",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash"
+  },
+  {
+    "timestamp": "2025-11-08T03:56:39.143722",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T03:56:39.145461",
+    "step": "start_orchestration",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T03:56:39.865267",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T03:56:39.877375",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T03:56:39.916660",
+    "step": "wrapped",
+    "message": "Attempt 1 failed: transient, retrying in 0s"
+  },
+  {
+    "timestamp": "2025-11-08T03:56:39.918592",
+    "step": "wrapped",
+    "message": "Attempt 2 failed: transient, retrying in 0s"
+  },
+  {
+    "timestamp": "2025-11-08T04:09:16.855721",
+    "step": "start_orchestration",
+    "message": "Received issue: Crash on login screen"
+  },
+  {
+    "timestamp": "2025-11-08T04:09:16.856722",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T04:09:16.856722",
+    "step": "start_orchestration",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T04:09:17.596834",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T04:09:17.600842",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T04:13:33.193493",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash"
+  },
+  {
+    "timestamp": "2025-11-08T04:13:33.197264",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T04:13:33.197264",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T04:13:33.843048",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T04:13:33.848106",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T04:13:33.858975",
+    "step": "wrapped",
+    "message": "Attempt 1 failed: transient, retrying in 0s"
+  },
+  {
+    "timestamp": "2025-11-08T04:13:33.858975",
+    "step": "wrapped",
+    "message": "Attempt 2 failed: transient, retrying in 0s"
+  },
+  {
+    "timestamp": "2025-11-08T04:54:27.489067",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T04:54:27.490123",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T04:54:27.491110",
+    "step": "start_orchestration",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T04:54:28.255027",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T04:54:28.259267",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T05:27:30.253676",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T05:27:30.258816",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T05:27:30.259816",
+    "step": "start_orchestration",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T05:27:30.911281",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T05:27:30.915475",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T05:27:43.680045",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T05:27:43.681562",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T05:27:43.684499",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T05:27:43.829056",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T05:27:43.831888",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T05:28:01.282573",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T05:28:01.282573",
+    "step": "mock_classify_issue",
+    "message": "Attempt 1 failed: Random tool error, retrying in 1s"
+  },
+  {
+    "timestamp": "2025-11-08T05:28:02.285775",
+    "step": "mock_classify_issue",
+    "message": "Attempt 2 failed: Random tool error, retrying in 2s"
+  },
+  {
+    "timestamp": "2025-11-08T05:28:04.288883",
+    "step": "mock_classify_issue",
+    "message": "\u26a0\ufe0f Circuit breaker OPEN"
+  },
+  {
+    "timestamp": "2025-11-08T05:28:04.288883",
+    "step": "mock_classify_issue",
+    "message": "Attempt 3 failed: Random tool error, retrying in 4s"
+  },
+  {
+    "timestamp": "2025-11-08T05:28:08.292879",
+    "step": "start_orchestration",
+    "message": "Error: Function mock_classify_issue failed after 3 retries"
+  },
+  {
+    "timestamp": "2025-11-08T05:28:17.430054",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T05:28:17.432815",
+    "step": "mock_classify_issue",
+    "message": "Attempt 1 failed: Circuit open: Skipping mock_classify_issue, retrying in 1s"
+  },
+  {
+    "timestamp": "2025-11-08T05:28:18.435647",
+    "step": "mock_classify_issue",
+    "message": "Attempt 2 failed: Circuit open: Skipping mock_classify_issue, retrying in 2s"
+  },
+  {
+    "timestamp": "2025-11-08T05:28:20.436832",
+    "step": "mock_classify_issue",
+    "message": "Attempt 3 failed: Circuit open: Skipping mock_classify_issue, retrying in 4s"
+  },
+  {
+    "timestamp": "2025-11-08T05:28:24.438315",
+    "step": "start_orchestration",
+    "message": "Error: Function mock_classify_issue failed after 3 retries"
+  },
+  {
+    "timestamp": "2025-11-08T05:45:23.322241",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T05:45:23.322241",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T05:45:23.322241",
+    "step": "start_orchestration",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T05:45:23.976069",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T05:45:23.980194",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T05:52:52.966591",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T05:52:52.967683",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T05:52:52.969339",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T05:52:53.592955",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T05:52:53.595590",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T05:53:04.108391",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T05:53:04.110733",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T05:53:04.111723",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T05:53:04.270605",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T05:53:04.275275",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T05:53:05.666276",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T05:53:05.670684",
+    "step": "mock_classify_issue",
+    "message": "Attempt 1 failed: Random tool error, retrying in 1s"
+  },
+  {
+    "timestamp": "2025-11-08T05:53:06.672753",
+    "step": "mock_classify_issue",
+    "message": "Attempt 2 failed: Random tool error, retrying in 2s"
+  },
+  {
+    "timestamp": "2025-11-08T05:53:08.675330",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-08T05:53:08.675330",
+    "step": "start_orchestration",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-08T05:53:08.804014",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T05:53:08.807600",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:02.329034",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:02.330843",
+    "step": "mock_classify_issue",
+    "message": "Attempt 1 failed: Random tool error, retrying in 1s"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:03.332464",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:03.332464",
+    "step": "start_orchestration",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:03.970069",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:03.973107",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:14.523297",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:14.526008",
+    "step": "mock_classify_issue",
+    "message": "Attempt 1 failed: Random tool error, retrying in 1s"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:15.527972",
+    "step": "mock_classify_issue",
+    "message": "Attempt 2 failed: Random tool error, retrying in 2s"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:17.530628",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:17.530628",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:17.684084",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:17.684084",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:23.434701",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:23.435789",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:23.435789",
+    "step": "start_orchestration",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:23.607635",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T05:56:23.609918",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T06:06:20.653834",
+    "step": "start_orchestration",
+    "message": "Received issue: Translation Issue"
+  },
+  {
+    "timestamp": "2025-11-08T06:06:20.655877",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T06:06:20.658877",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T06:06:21.402651",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/n8n-io/n8n/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T06:06:21.410862",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T06:09:15.651535",
+    "step": "start_orchestration",
+    "message": "Received issue: Translation Issue"
+  },
+  {
+    "timestamp": "2025-11-08T06:09:15.653940",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T06:09:15.654938",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T06:09:16.336040",
+    "step": "start_orchestration",
+    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/n8n-io/n8n/raw/main/README.md"
+  },
+  {
+    "timestamp": "2025-11-08T06:09:16.339613",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T06:10:15.428899",
+    "step": "start_orchestration",
+    "message": "Received issue: Translation Issue"
+  },
+  {
+    "timestamp": "2025-11-08T06:10:15.428899",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T06:10:15.428899",
+    "step": "start_orchestration",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T06:10:16.237795",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T06:10:18.402306",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-08T06:10:18.402306",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T06:11:05.437037",
+    "step": "start_orchestration",
+    "message": "Received issue: Translation Issue"
+  },
+  {
+    "timestamp": "2025-11-08T06:11:05.437037",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T06:11:05.438937",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T06:11:05.692068",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T06:11:05.694068",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-08T06:11:05.696065",
+    "step": "start_orchestration",
+    "message": "Executor check: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T06:38:45.827673",
+    "step": "start_orchestration",
+    "message": "Received issue: App crashes on login when I click Submit. Steps: 1) Open app 2) Login 3) Click Submit"
+  },
+  {
+    "timestamp": "2025-11-08T06:38:45.827673",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-08T06:38:45.827673",
+    "step": "start_orchestration",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-08T06:38:46.116176",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T06:38:46.150152",
+    "step": "start_orchestration",
+    "message": "Error: Object of type ndarray is not JSON serializable"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:17.596054",
+    "step": "start_orchestration",
+    "message": "Received issue: App crashes on login when I click Submit. Steps: 1) Open app 2) Login 3) Click Submit"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:17.598066",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:17.598582",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:17.865219",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:17.867425",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:17.869396",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:17.873613",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:17.875386",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/84417db4"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:41.098619",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:41.099604",
+    "step": "mock_classify_issue",
+    "message": "Attempt 1 failed: Random tool error, retrying in 1s"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:42.100950",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:42.100950",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:42.341349",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:42.346134",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:42.347145",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:42.350213",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T06:39:42.350213",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/474eac00"
+  },
+  {
+    "timestamp": "2025-11-08T06:42:14.095317",
+    "step": "start_orchestration",
+    "message": "Received issue: App crashes on login when I click Submit. Steps: 1) Open app 2) Login 3) Click Submit"
+  },
+  {
+    "timestamp": "2025-11-08T06:42:14.097053",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-08T06:42:14.097053",
+    "step": "start_orchestration",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-08T06:42:14.346397",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T06:42:14.352728",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-08T06:42:14.352728",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-08T06:42:14.355972",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T06:42:14.357941",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/9dec8527"
+  },
+  {
+    "timestamp": "2025-11-08T06:43:33.278308",
+    "step": "start_orchestration",
+    "message": "Received issue: App crashes on login when I click Submit. Steps: 1) Open app 2) Login 3) Click Submit"
+  },
+  {
+    "timestamp": "2025-11-08T06:43:33.282085",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T06:43:33.282614",
+    "step": "start_orchestration",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T06:43:33.530248",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T06:43:33.536221",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-08T06:43:33.538842",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-08T06:43:33.542255",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T06:43:33.544501",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/81c52c5f"
+  },
+  {
+    "timestamp": "2025-11-08T07:26:54.129788",
+    "step": "start_orchestration",
+    "message": "Received issue: Translation Issue"
+  },
+  {
+    "timestamp": "2025-11-08T07:26:54.142178",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T07:26:54.156251",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-08T07:26:54.450828",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T07:26:54.489505",
+    "step": "start_orchestration",
+    "message": "Error: Object of type ndarray is not JSON serializable"
+  },
+  {
+    "timestamp": "2025-11-08T07:27:01.383602",
+    "step": "start_orchestration",
+    "message": "Received issue: Translation Issue"
+  },
+  {
+    "timestamp": "2025-11-08T07:27:01.400876",
+    "step": "mock_classify_issue",
+    "message": "Attempt 1 failed: Random tool error, retrying in 1s"
+  },
+  {
+    "timestamp": "2025-11-08T07:27:02.416927",
+    "step": "mock_classify_issue",
+    "message": "Attempt 2 failed: Random tool error, retrying in 2s"
+  },
+  {
+    "timestamp": "2025-11-08T07:27:04.425997",
+    "step": "mock_classify_issue",
+    "message": "\u26a0\ufe0f Circuit breaker OPEN"
+  },
+  {
+    "timestamp": "2025-11-08T07:27:04.436295",
+    "step": "mock_classify_issue",
+    "message": "Attempt 3 failed: Random tool error, retrying in 4s"
+  },
+  {
+    "timestamp": "2025-11-08T07:27:08.445047",
+    "step": "start_orchestration",
+    "message": "Error: Function mock_classify_issue failed after 3 retries"
+  },
+  {
+    "timestamp": "2025-11-08T07:27:15.785369",
+    "step": "start_orchestration",
+    "message": "Received issue: Translation Issue"
+  },
+  {
+    "timestamp": "2025-11-08T07:27:15.804633",
+    "step": "mock_classify_issue",
+    "message": "Attempt 1 failed: Circuit open: Skipping mock_classify_issue, retrying in 1s"
+  },
+  {
+    "timestamp": "2025-11-08T07:27:16.820976",
+    "step": "mock_classify_issue",
+    "message": "Attempt 2 failed: Circuit open: Skipping mock_classify_issue, retrying in 2s"
+  },
+  {
+    "timestamp": "2025-11-08T07:27:18.831775",
+    "step": "mock_classify_issue",
+    "message": "Attempt 3 failed: Circuit open: Skipping mock_classify_issue, retrying in 4s"
+  },
+  {
+    "timestamp": "2025-11-08T07:27:22.858307",
+    "step": "start_orchestration",
+    "message": "Error: Function mock_classify_issue failed after 3 retries"
+  },
+  {
+    "timestamp": "2025-11-08T07:30:04.135142",
+    "step": "start_orchestration",
+    "message": "Received issue: Translation Issue"
+  },
+  {
+    "timestamp": "2025-11-08T07:30:04.150598",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T07:30:04.169295",
+    "step": "start_orchestration",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T07:30:04.473578",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T07:30:04.511553",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-08T07:30:04.529548",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-08T07:30:04.577080",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T07:30:04.654889",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/1a0ce3de"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:50.390741",
+    "step": "start_orchestration",
+    "message": "Received issue: Translation Issue"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:50.401857",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:50.410878",
+    "step": "start_orchestration",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:51.202295",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:51.262849",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:51.298975",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:51.328586",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:51.448307",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/db88619e"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:02.993641",
+    "step": "start_orchestration",
+    "message": "Received issue: Translation Issue"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.011839",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.027581",
+    "step": "start_orchestration",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.098860",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.126855",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.140297",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.154758",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.199085",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/105ee90e"
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "detail": [
+    {
+      "type": "missing",
+      "loc": [
+        "body",
+        "repo_url"
+      ],
+      "msg": "Field required",
+      "input": {
+        "repo": "sample-repo-0",
+        "issue_text": "Repo: sample-repo-1 | Issue: 'App crashes on startup when config has empty value. Steps: open app, click start.'"
+      }
+    }
+  ]
+}
