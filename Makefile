@@ -11,3 +11,6 @@ down:
 
 logs:
 	docker compose logs -f
+
+sample-runs:
+	bash scripts/run_sample_runs.sh
