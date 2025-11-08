@@ -12,6 +12,8 @@ from packages.agents.reliability import log_step
 from packages.ws.manager import manager as ws_manager
 from packages.tools import http_fetcher, vector_store, executor
 from packages.eval import harness as eval_harness
+from packages.agents.fix_proposer import extract_repro_steps, propose_fix_sketch
+from packages.tools.github_mock import create_dry_pr
 
 app = FastAPI(title="Issue Triage Orchestrator", version="0.5.0")
 
@@ -77,14 +79,27 @@ async def start_orchestration(state: OrchestratorState):
             vs.add(f"{state.repo_url}::readme", readme_text)
             log_step("start_orchestration", "Indexed README into vector store")
 
-        # 4) create a tiny failing test snippet (mock) and syntax-check
-        failing_test_code = (
-            "import pytest\n\n"
-            "def test_sample_behavior():\n"
-            "    assert 1 == 2  # intentionally failing test skeleton\n"
-        )
+        # 4) propose fix sketch + failing test (using proposer)
+        repro_steps = extract_repro_steps(state.issue_text)
+        fix_sketch, failing_test_code = propose_fix_sketch(state.severity, repro_steps, repo_readme=readme_text if 'readme_text' in locals() else "")
+        log_step("start_orchestration", "Generated fix sketch and failing test skeleton")
+
+        # 5) syntax-check the generated failing test
         exec_check = executor.syntax_check(failing_test_code)
-        log_step("start_orchestration", f"Executor check: {exec_check.get('message')}")
+        log_step("start_orchestration", f"Executor check for generated test: {exec_check.get('message')}")
+
+        # 6) create dry-run PR artifact locally (mock)
+        pr_title = f"[Triage] proposed fix - {state.issue_text[:60]}"
+        pr_body = f"Automated triage: proposed fix sketch\\n\\n{fix_sketch}\\n\\nRepro steps:\\n" + "\\n".join(f"- {s}" for s in repro_steps)
+        branch = f"triage/proposed-fix-{state.severity or 'unknown'}-{state.repo_url.split('/')[-1][:12]}"
+        pr_files = {
+            # place tests in a conventional path
+            f"tests/test_regression_{state.repo_url.split('/')[-1][:12]}.py": failing_test_code
+        }
+        pr_result = create_dry_pr(pr_title, pr_body, branch, pr_files)
+        state.pr_url = pr_result["pr_url"]
+        log_step("start_orchestration", f"Created dry-run PR: {state.pr_url}")
+
         state.status = "completed"
 
         metrics = eval_harness.compute_metrics()
@@ -94,6 +109,7 @@ async def start_orchestration(state: OrchestratorState):
             "readme_result": readme_result,
             "executor_check": exec_check,
             "metrics": metrics,
+            "pr_result": pr_result,
             "message": "Run completed (dry-run)."
         }
 
