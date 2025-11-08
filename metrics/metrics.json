@@ -1,9 +1,9 @@
 {
-  "generated_at": "2025-11-08T07:30:04.739943",
-  "steps_count": 178,
+  "generated_at": "2025-11-08T11:30:03.218071",
+  "steps_count": 194,
   "unique_steps": 3,
   "error_count": 49,
-  "tool_error_rate": 0.2753,
+  "tool_error_rate": 0.2526,
   "avg_errors_per_step": 16.3333,
-  "eval_score": 36
+  "eval_score": 37
 }

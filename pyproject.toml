@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "issue-triage-orchestrator"
+version = "0.5.0"
+description = "Minimal Multi-Agent Orchestrator for Issue Triage workflow — classify issue severity, extract repro steps, propose fix sketch, and open dry-run PR with failing unit test."
+authors = ["Tanish Shah <tanish@example.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    { include = "apps" },
+    { include = "packages" },
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+fastapi = "^0.115.0"
+uvicorn = { extras = ["standard"], version = "^0.30.1" }
+pydantic = "^2.8.0"
+httpx = "^0.27.0"
+requests = "^2.32.3"
+faiss-cpu = "^1.8.0"          # optional, can use mocked vector store if unavailable
+beautifulsoup4 = "^4.12.3"    # for parsing HTML if needed in future
+aiofiles = "^23.2.1"
+tenacity = "^9.0.0"           # for potential retries (optional)
+python-dotenv = "^1.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.0"
+pytest-asyncio = "^0.23.8"
+httpx = "^0.27.0"
+black = "^24.4.2"
+ruff = "^0.5.1"
+
+[tool.poetry.scripts]
+orchestrator = "apps.orchestrator.main:app"
+
+[build-system]
+requires = ["poetry-core>=1.8.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
+select = ["E", "F"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v"

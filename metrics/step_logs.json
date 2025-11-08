@@ -888,5 +888,85 @@
     "timestamp": "2025-11-08T07:30:04.654889",
     "step": "start_orchestration",
     "message": "Created dry-run PR: dry://pr/1a0ce3de"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:50.390741",
+    "step": "start_orchestration",
+    "message": "Received issue: Translation Issue"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:50.401857",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:50.410878",
+    "step": "start_orchestration",
+    "message": "Issue classified as low"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:51.202295",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:51.262849",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:51.298975",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:51.328586",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T11:29:51.448307",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/db88619e"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:02.993641",
+    "step": "start_orchestration",
+    "message": "Received issue: Translation Issue"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.011839",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.027581",
+    "step": "start_orchestration",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.098860",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.126855",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.140297",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.154758",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-08T11:30:03.199085",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/105ee90e"
   }
 ]
