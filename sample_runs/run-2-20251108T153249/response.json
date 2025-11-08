@@ -1,0 +1,16 @@
+{
+  "detail": [
+    {
+      "type": "missing",
+      "loc": [
+        "body",
+        "repo_url"
+      ],
+      "msg": "Field required",
+      "input": {
+        "repo": "sample-repo-1",
+        "issue_text": "Repo: sample-repo-2 | Issue: 'Unit tests failing intermittently in CI after dependency upgrade to x.y.z. Steps: run pytest -k integration.'"
+      }
+    }
+  ]
+}
