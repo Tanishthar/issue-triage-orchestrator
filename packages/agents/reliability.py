@@ -57,6 +57,16 @@ LOG_FILE = "metrics/step_logs.json"
 
 def log_step(step_name, message):
     os.makedirs("metrics", exist_ok=True)
+    # Safely convert message to string (handles ndarray and other non-serializable types)
+    if not isinstance(message, str):
+        try:
+            message = str(message)
+        except Exception:
+            message = repr(message)  # Fallback to repr if str() fails
+    # Truncate very long messages to avoid JSON issues
+    if len(message) > 5000:
+        message = message[:5000] + "... (truncated)"
+    
     log_entry = {
         "timestamp": datetime.utcnow().isoformat(),
         "step": step_name,

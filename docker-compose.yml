@@ -35,7 +35,8 @@ services:
     env_file:
       - .env
     environment:
-      - NEXT_PUBLIC_API_URL=http://orchestrator:8000
+      - NEXT_PUBLIC_API_BASE=http://localhost:8000
+      - NEXT_PUBLIC_WS_BASE=ws://localhost:8000/ws
     ports:
       - "3000:3000"
     depends_on:

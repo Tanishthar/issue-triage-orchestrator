@@ -40,6 +40,7 @@ app.add_middleware(
 class OrchestratorState(BaseModel):
     repo_url: str
     issue_text: str
+    readme_file_path: Optional[str] = None  # Optional: URL or local file path to README
     severity: Optional[str] = None
     repro_steps: Optional[str] = None
     proposed_fix: Optional[str] = None
@@ -62,13 +63,38 @@ async def start_orchestration(state: OrchestratorState):
 
         # 2) fetch repo README (best-effort)
         readme_result = None
+        readme_text = ""
         try:
-            # readme_url = state.repo_url.rstrip("/") + "/raw/main/README.md"
-            readme_url = "https://github.com/n8n-io/n8n/blob/master/README.md"
-            fetch_res = http_fetcher.fetch(readme_url)
-            readme_text = fetch_res["text"][:10000]  # trim for safety
-            readme_result = {"fetched": True, "from_cache": fetch_res["from_cache"], "len": len(readme_text)}
-            log_step("start_orchestration", f"Fetched README ({readme_url}) len={len(readme_text)}")
+            if state.readme_file_path:
+                # Use provided README path/URL
+                if state.readme_file_path.startswith("http://") or state.readme_file_path.startswith("https://"):
+                    # It's a URL
+                    readme_url = state.readme_file_path
+                    fetch_res = http_fetcher.fetch(readme_url)
+                    readme_text = fetch_res["text"][:10000]  # trim for safety
+                    readme_result = {"fetched": True, "from_cache": fetch_res["from_cache"], "len": len(readme_text), "source": "provided_url"}
+                    log_step("start_orchestration", f"Fetched README from provided URL ({readme_url}) len={len(readme_text)}")
+                else:
+                    # It's a local file path
+                    if os.path.exists(state.readme_file_path):
+                        with open(state.readme_file_path, "r", encoding="utf-8") as f:
+                            readme_text = f.read()[:10000]  # trim for safety
+                        readme_result = {"fetched": True, "len": len(readme_text), "source": "local_file"}
+                        log_step("start_orchestration", f"Loaded README from local file ({state.readme_file_path}) len={len(readme_text)}")
+                    else:
+                        readme_result = {"fetched": False, "error": f"File not found: {state.readme_file_path}"}
+                        log_step("start_orchestration", f"README file not found: {state.readme_file_path}")
+            else:
+                # Auto-detect README URL from repo
+                readme_url = state.repo_url.rstrip("/") + "/raw/main/README.md"
+                try:
+                    fetch_res = http_fetcher.fetch(readme_url)
+                    readme_text = fetch_res["text"][:10000]  # trim for safety
+                    readme_result = {"fetched": True, "from_cache": fetch_res["from_cache"], "len": len(readme_text), "source": "auto_detected"}
+                    log_step("start_orchestration", f"Fetched README (auto-detected: {readme_url}) len={len(readme_text)}")
+                except Exception as e:
+                    readme_result = {"fetched": False, "error": str(e), "source": "auto_detected"}
+                    log_step("start_orchestration", f"README auto-fetch failed: {e}")
         except Exception as e:
             readme_result = {"fetched": False, "error": str(e)}
             log_step("start_orchestration", f"README fetch failed: {e}")
@@ -81,7 +107,7 @@ async def start_orchestration(state: OrchestratorState):
 
         # 4) propose fix sketch + failing test (using proposer)
         repro_steps = extract_repro_steps(state.issue_text)
-        fix_sketch, failing_test_code = propose_fix_sketch(state.severity, repro_steps, repo_readme=readme_text if 'readme_text' in locals() else "")
+        fix_sketch, failing_test_code = propose_fix_sketch(state.severity, repro_steps, repo_readme=readme_text)
         log_step("start_orchestration", "Generated fix sketch and failing test skeleton")
 
         # 5) syntax-check the generated failing test
@@ -103,6 +129,13 @@ async def start_orchestration(state: OrchestratorState):
         state.status = "completed"
 
         metrics = eval_harness.compute_metrics()
+        
+        # Broadcast metrics update to WebSocket clients
+        try:
+            await ws_manager.broadcast({"type": "metrics_update", "metrics": metrics})
+        except Exception:
+            # best-effort only; do not raise
+            pass
 
         return {
             "final_state": state.model_dump(),
@@ -114,8 +147,13 @@ async def start_orchestration(state: OrchestratorState):
         }
 
     except Exception as e:
-        log_step("start_orchestration", f"Error: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        # Safely convert exception to string (handles ndarray and other non-serializable types)
+        error_msg = str(e)
+        # If the error message is too long or contains complex objects, truncate it
+        if len(error_msg) > 1000:
+            error_msg = error_msg[:1000] + "... (truncated)"
+        log_step("start_orchestration", f"Error: {error_msg}")
+        raise HTTPException(status_code=500, detail=error_msg)
 
 @app.get("/metrics")
 async def get_metrics():

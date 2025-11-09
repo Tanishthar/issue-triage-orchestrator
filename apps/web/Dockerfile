@@ -33,8 +33,9 @@ COPY --from=builder /app/package.json ./package.json
 # Node modules are copied to run the built application
 COPY --from=builder /app/node_modules ./node_modules 
 
-# Default environment variable for backend communication
-# This ensures the frontend client knows how to reach the orchestrator service inside Docker network
-ENV NEXT_PUBLIC_API_URL="http://orchestrator:8000"
+# Default environment variables for backend communication
+# Note: These are used by the browser (client-side), so they must use localhost, not the Docker service name
+ENV NEXT_PUBLIC_API_BASE="http://localhost:8000"
+ENV NEXT_PUBLIC_WS_BASE="ws://localhost:8000/ws"
 
 CMD ["npm", "run", "start"]
