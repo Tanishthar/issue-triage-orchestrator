@@ -1,22 +1,26 @@
 # Minimal Multi-Agent Orchestrator — Issue Triage Workflow
 
 ### Owner: Tanish
-### Status: Completed through Phase 6 (Dockerized). Phase 7 adds docs, sample runs, and design notes.
+### Status: Completed through Phase 7 (LLM Integration). Now includes real LLM agent with tool-driven reasoning.
 
 ## Quick summary
 
 This repository implements a minimal multi-agent orchestrator for an Issue Triage workflow:
 - Input: GitHub repo + issue text
-- Workflow: severity classification → repro extraction → fix proposer → failing unit test generation → dry-run PR creation (artifact)
-- Stack: FastAPI (orchestrator), Next.js + Tailwind (dashboard), typed state with Pydantic, reliability layer (retries, backoff, circuit-breaker), tools (safe HTTP fetcher, mock vector store, executor sandbox), evaluation harness, WebSocket live logs.
+- Workflow: **LLM-based** severity classification → repro extraction → fix proposer → failing unit test generation → dry-run PR creation (artifact)
+- Stack: FastAPI (orchestrator), Next.js + Tailwind (dashboard), **OpenAI LLM agent with tool calling**, typed state with Pydantic, reliability layer (retries, backoff, circuit-breaker), tools (safe HTTP fetcher, mock vector store, executor sandbox), evaluation harness, WebSocket live logs.
 
 ## Quickstart (one-command)
 
-1. Copy env:
+1. Copy env and set API keys (optional, falls back to mock mode):
 ```bash
 cp .env.example .env
-# fill any API keys if you plan to use them
+# Add your API keys (at least one):
+# OPENAI_API_KEY=sk-...          # For GPT models
+# GEMINI_API_KEY=...             # For Gemini models
 ```
+
+**Note:** If no API keys are provided, the system runs in mock mode with heuristic-based responses. You can use either OpenAI or Gemini models independently.
 
 2. Build & run:
 ```bash
@@ -41,14 +45,65 @@ make up
 | GET | /metrics | Latest metrics snapshot. |
 | WebSocket | /ws | Live logs & metrics stream. |
 
+## LLM Agent Integration
+
+The orchestrator now uses a **real LLM agent** (OpenAI) with tool-driven reasoning:
+
+### Features
+- **Multi-model support**: Choose between OpenAI (GPT-4o-mini) and Google Gemini models
+- **LLM-based classification**: Uses selected model to classify issue severity (low/medium/high/critical)
+- **LLM-based repro extraction**: Extracts reproduction steps from issue text
+- **Tool-driven reasoning**: Agent can call tools (HTTP fetcher, vector store, syntax checker) to gather context
+- **Fix proposal**: LLM generates fix sketches and failing test code
+- **Full observability**: All tool calls and reasoning steps are logged
+- **Model switching**: Frontend dropdown to switch between models on-the-fly
+
+### Supported Models
+- **OpenAI**: GPT-4o-mini (default), GPT-4o, GPT-4-turbo, GPT-3.5-turbo
+- **Google Gemini**: Gemini 2.0 Flash Experimental, Gemini 1.5 Flash, Gemini 1.5 Pro
+
+### Tool Calling
+The LLM agent has access to these tools:
+1. **fetch_url**: Fetch content from URLs (READMEs, documentation)
+2. **search_documentation**: Search vector store for relevant context
+3. **check_code_syntax**: Validate generated Python code syntax
+
+### Safety & Budget
+- **Mock mode fallback**: If no API key is set, uses heuristic-based mock responses
+- **Token limits**: Max 2000 tokens per LLM call
+- **Timeout protection**: 5-minute timeout for API calls
+- **Error handling**: Graceful degradation on API failures
+
+### Prompts
+The agent uses structured prompts for:
+- Severity classification (considers impact, frequency, workarounds, security)
+- Repro step extraction (numbered list format)
+- Fix proposal (JSON format with fix_sketch and test_code)
+
+See `packages/agents/llm_agent.py` for prompt details.
+
 ## Reproducible Sample Runs
 
+### LLM Agent Demo
+Run a demonstrable LLM agent workflow:
+```bash
+python scripts/run_llm_demo.py
+```
+
+This demonstrates:
+- LLM severity classification
+- LLM repro step extraction  
+- Tool-driven reasoning (if README available)
+- Fix proposal with test generation
+- Full artifact capture
+
+### Legacy Sample Runs
 Run the provided script to execute 3 sample runs and persist artifacts:
 ```bash 
 scripts/run_sample_runs.sh
 ```
 
-Artifacts saved under sample_runs/ and packages/tools/_dry_prs/. Metrics written to metrics/metrics.json.
+Artifacts saved under `sample_runs/` and `packages/tools/_dry_prs/`. Metrics written to `metrics/metrics.json`.
 
 ## Repo Layout
 
@@ -86,7 +141,49 @@ ls packages/tools/_dry_prs/
 cat metrics/metrics.json
 ```
 
+## LLM Integration Details
+
+### Architecture
+- **Agent**: `packages/agents/llm_agent.py` - Core LLM agent with tool calling
+- **Tool Wrappers**: `packages/agents/tool_wrappers.py` - Wraps tools for LLM use
+- **Orchestrator Integration**: `apps/orchestrator/main.py` - Uses LLM agent instead of mocks
+
+### Control Flow
+1. **Initialization**: LLM agent created with registered tools
+2. **Severity Classification**: Direct LLM call with issue text
+3. **README Fetching**: Traditional tool call (not LLM-driven)
+4. **Vector Store Indexing**: Index README for context
+5. **Repro Extraction**: LLM extracts steps from issue
+6. **Tool-Driven Reasoning** (if README available):
+   - Agent can search vector store for context
+   - Agent can fetch additional URLs if needed
+   - Agent validates code syntax
+7. **Fix Proposal**: LLM generates fix sketch and test code
+8. **Syntax Validation**: Executor validates generated code
+9. **PR Creation**: Dry-run PR artifact created
+
+### Logging & Observability
+All tool calls are logged with:
+- Tool name and arguments
+- Tool results (truncated to 500 chars)
+- Tool errors
+- LLM reasoning iterations
+- Full control loop visibility
+
+Check `metrics/step_logs.json` for complete execution trace.
+
+### Budget Considerations
+- **Model**: Defaults to `gpt-4o-mini` (cost-effective)
+- **Max tokens**: 2000 per call (prevents runaway costs)
+- **Max iterations**: 3-5 for tool reasoning (prevents loops)
+- **Caching**: HTTP fetcher uses cache to reduce API calls
+- **Mock mode**: No costs when API key not set
+
 ## Next Steps / Stretch Goals
-- LLM swapping for token-cost optimization
-- Tool result caching (local vector store)
-- Canary run to detect performance degradation
+- ✅ LLM integration with tool calling
+- ✅ Tool-driven reasoning loop
+- ✅ Full observability of tool calls
+- 🔄 LLM swapping for token-cost optimization (Claude, local models)
+- 🔄 Tool result caching (local vector store)
+- 🔄 Canary run to detect performance degradation
+- 🔄 Streaming responses for better UX

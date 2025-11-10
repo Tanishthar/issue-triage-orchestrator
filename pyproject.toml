@@ -22,6 +22,8 @@ beautifulsoup4 = "^4.12.3"    # for parsing HTML if needed in future
 aiofiles = "^23.2.1"
 tenacity = "^9.0.0"           # for potential retries (optional)
 python-dotenv = "^1.0.1"
+openai = "^1.0.0"             # for LLM agent (optional, falls back to mock if unavailable)
+google-generativeai = "^0.8.0"  # for Gemini models (optional, falls back to mock if unavailable)
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.0"

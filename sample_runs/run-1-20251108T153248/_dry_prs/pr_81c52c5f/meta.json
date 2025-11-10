@@ -1,8 +1,0 @@
-{
-  "pr_id": "81c52c5f",
-  "title": "[Triage] proposed fix - App crashes on login when I click Submit. Steps: 1) Open app",
-  "body": "Automated triage: proposed fix sketch\\n\\nRepro summary: App crashes on login when I click Submit. \u2192 Steps: 1) Open app 2) Login 3) Click Submit\nSeverity: low\n\nHypothesis:\n  The issue is likely caused by unhandled exception or nil/None dereference during startup path. To validate and fix quickly:\n  1) Add a focused unit test that reproduces the failing behavior (see attached test skeleton).\n  2) Run that test to confirm failure and reproduce stacktrace.\n  3) Add guards / input validation and/or catch the exception at the caller boundary.\n  4) Add a regression test to CI to prevent future regressions.\n\nSuggested code changes (high-level):\n  - Add validation checks where inputs are parsed / used.\n  - Replace direct dereference with safe checks or try/except to produce friendly error messages.\n  - If this is concurrency-related, introduce locking or move blocking I/O to background tasks.\n\nNotes:\n  - This is a sketch to guide the first quick iteration; further debugging with logs/stacktrace is recommended.\\n\\nRepro steps:\\n- App crashes on login when I click Submit.\\n- Steps: 1) Open app 2) Login 3) Click Submit",
-  "branch": "triage/proposed-fix-low-repo",
-  "created_at": "2025-11-08T06:43:33.543253",
-  "file_count": 1
-}

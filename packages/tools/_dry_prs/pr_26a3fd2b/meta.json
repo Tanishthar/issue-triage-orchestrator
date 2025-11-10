@@ -1,0 +1,8 @@
+{
+  "pr_id": "26a3fd2b",
+  "title": "[Triage] proposed fix - Cannot use the library when running in linux environment",
+  "body": "Automated triage: proposed fix sketch\\n\\nBased on the issue description, I classify this as **high** severity because it involves a crash on startup.\\n\\nRepro steps:\\n- Start the application\\n- Navigate to the problematic feature\\n- Observe the crash/error",
+  "branch": "triage/proposed-fix-high-opencv",
+  "created_at": "2025-11-10T05:03:29.772564",
+  "file_count": 1
+}

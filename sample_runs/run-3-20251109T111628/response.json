@@ -1,0 +1,16 @@
+{
+  "detail": [
+    {
+      "type": "missing",
+      "loc": [
+        "body",
+        "repo_url"
+      ],
+      "msg": "Field required",
+      "input": {
+        "repo": "sample-repo-2",
+        "issue_text": "Repo: https://github.com/opencv/opencv | \n  Issue : 'repeated complex calculation in audio buffer duration computation in CvCapture_MSMF::grabFrame()' |\n  README: https://github.com/opencv/opencv/blob/4.x/README.md "
+      }
+    }
+  ]
+}

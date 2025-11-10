@@ -1,972 +1,1402 @@
 [
   {
-    "timestamp": "2025-11-07T08:11:40.156343",
-    "step": "start_orchestration",
-    "message": "Received issue: Crash on login screen"
-  },
-  {
-    "timestamp": "2025-11-07T08:11:40.157340",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-07T08:11:40.157340",
-    "step": "start_orchestration",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T03:45:25.743292",
-    "step": "wrapped",
-    "message": "Attempt 1 failed: transient, retrying in 0s"
-  },
-  {
-    "timestamp": "2025-11-08T03:45:25.746678",
-    "step": "wrapped",
-    "message": "Attempt 2 failed: transient, retrying in 0s"
-  },
-  {
-    "timestamp": "2025-11-08T03:46:54.468344",
-    "step": "wrapped",
-    "message": "Attempt 1 failed: transient, retrying in 0s"
-  },
-  {
-    "timestamp": "2025-11-08T03:46:54.474828",
-    "step": "wrapped",
-    "message": "Attempt 2 failed: transient, retrying in 0s"
-  },
-  {
-    "timestamp": "2025-11-08T03:49:42.884035",
-    "step": "wrapped",
-    "message": "Attempt 1 failed: transient, retrying in 0s"
-  },
-  {
-    "timestamp": "2025-11-08T03:49:42.884491",
-    "step": "wrapped",
-    "message": "Attempt 2 failed: transient, retrying in 0s"
-  },
-  {
-    "timestamp": "2025-11-08T03:56:39.136894",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash"
-  },
-  {
-    "timestamp": "2025-11-08T03:56:39.143722",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T03:56:39.145461",
-    "step": "start_orchestration",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T03:56:39.865267",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T03:56:39.877375",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T03:56:39.916660",
-    "step": "wrapped",
-    "message": "Attempt 1 failed: transient, retrying in 0s"
-  },
-  {
-    "timestamp": "2025-11-08T03:56:39.918592",
-    "step": "wrapped",
-    "message": "Attempt 2 failed: transient, retrying in 0s"
-  },
-  {
-    "timestamp": "2025-11-08T04:09:16.855721",
-    "step": "start_orchestration",
-    "message": "Received issue: Crash on login screen"
-  },
-  {
-    "timestamp": "2025-11-08T04:09:16.856722",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T04:09:16.856722",
-    "step": "start_orchestration",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T04:09:17.596834",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T04:09:17.600842",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T04:13:33.193493",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash"
-  },
-  {
-    "timestamp": "2025-11-08T04:13:33.197264",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T04:13:33.197264",
-    "step": "start_orchestration",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T04:13:33.843048",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T04:13:33.848106",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T04:13:33.858975",
-    "step": "wrapped",
-    "message": "Attempt 1 failed: transient, retrying in 0s"
-  },
-  {
-    "timestamp": "2025-11-08T04:13:33.858975",
-    "step": "wrapped",
-    "message": "Attempt 2 failed: transient, retrying in 0s"
-  },
-  {
-    "timestamp": "2025-11-08T04:54:27.489067",
+    "timestamp": "2025-11-08T11:57:04.718842",
     "step": "start_orchestration",
     "message": "Received issue: Sample crash on startup"
   },
   {
-    "timestamp": "2025-11-08T04:54:27.490123",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T04:54:27.491110",
-    "step": "start_orchestration",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T04:54:28.255027",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T04:54:28.259267",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T05:27:30.253676",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash on startup"
-  },
-  {
-    "timestamp": "2025-11-08T05:27:30.258816",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T05:27:30.259816",
-    "step": "start_orchestration",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T05:27:30.911281",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T05:27:30.915475",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T05:27:43.680045",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash on startup"
-  },
-  {
-    "timestamp": "2025-11-08T05:27:43.681562",
+    "timestamp": "2025-11-08T11:57:04.726194",
     "step": "mock_classify_issue",
     "message": "Issue classified as medium"
   },
   {
-    "timestamp": "2025-11-08T05:27:43.684499",
+    "timestamp": "2025-11-08T11:57:04.740551",
     "step": "start_orchestration",
     "message": "Issue classified as medium"
   },
   {
-    "timestamp": "2025-11-08T05:27:43.829056",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T05:27:43.831888",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T05:28:01.282573",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash on startup"
-  },
-  {
-    "timestamp": "2025-11-08T05:28:01.282573",
-    "step": "mock_classify_issue",
-    "message": "Attempt 1 failed: Random tool error, retrying in 1s"
-  },
-  {
-    "timestamp": "2025-11-08T05:28:02.285775",
-    "step": "mock_classify_issue",
-    "message": "Attempt 2 failed: Random tool error, retrying in 2s"
-  },
-  {
-    "timestamp": "2025-11-08T05:28:04.288883",
-    "step": "mock_classify_issue",
-    "message": "\u26a0\ufe0f Circuit breaker OPEN"
-  },
-  {
-    "timestamp": "2025-11-08T05:28:04.288883",
-    "step": "mock_classify_issue",
-    "message": "Attempt 3 failed: Random tool error, retrying in 4s"
-  },
-  {
-    "timestamp": "2025-11-08T05:28:08.292879",
-    "step": "start_orchestration",
-    "message": "Error: Function mock_classify_issue failed after 3 retries"
-  },
-  {
-    "timestamp": "2025-11-08T05:28:17.430054",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash on startup"
-  },
-  {
-    "timestamp": "2025-11-08T05:28:17.432815",
-    "step": "mock_classify_issue",
-    "message": "Attempt 1 failed: Circuit open: Skipping mock_classify_issue, retrying in 1s"
-  },
-  {
-    "timestamp": "2025-11-08T05:28:18.435647",
-    "step": "mock_classify_issue",
-    "message": "Attempt 2 failed: Circuit open: Skipping mock_classify_issue, retrying in 2s"
-  },
-  {
-    "timestamp": "2025-11-08T05:28:20.436832",
-    "step": "mock_classify_issue",
-    "message": "Attempt 3 failed: Circuit open: Skipping mock_classify_issue, retrying in 4s"
-  },
-  {
-    "timestamp": "2025-11-08T05:28:24.438315",
-    "step": "start_orchestration",
-    "message": "Error: Function mock_classify_issue failed after 3 retries"
-  },
-  {
-    "timestamp": "2025-11-08T05:45:23.322241",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash on startup"
-  },
-  {
-    "timestamp": "2025-11-08T05:45:23.322241",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T05:45:23.322241",
-    "step": "start_orchestration",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T05:45:23.976069",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T05:45:23.980194",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T05:52:52.966591",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash on startup"
-  },
-  {
-    "timestamp": "2025-11-08T05:52:52.967683",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T05:52:52.969339",
-    "step": "start_orchestration",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T05:52:53.592955",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T05:52:53.595590",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T05:53:04.108391",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash on startup"
-  },
-  {
-    "timestamp": "2025-11-08T05:53:04.110733",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T05:53:04.111723",
-    "step": "start_orchestration",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T05:53:04.270605",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T05:53:04.275275",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T05:53:05.666276",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash on startup"
-  },
-  {
-    "timestamp": "2025-11-08T05:53:05.670684",
-    "step": "mock_classify_issue",
-    "message": "Attempt 1 failed: Random tool error, retrying in 1s"
-  },
-  {
-    "timestamp": "2025-11-08T05:53:06.672753",
-    "step": "mock_classify_issue",
-    "message": "Attempt 2 failed: Random tool error, retrying in 2s"
-  },
-  {
-    "timestamp": "2025-11-08T05:53:08.675330",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as high"
-  },
-  {
-    "timestamp": "2025-11-08T05:53:08.675330",
-    "step": "start_orchestration",
-    "message": "Issue classified as high"
-  },
-  {
-    "timestamp": "2025-11-08T05:53:08.804014",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T05:53:08.807600",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:02.329034",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash on startup"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:02.330843",
-    "step": "mock_classify_issue",
-    "message": "Attempt 1 failed: Random tool error, retrying in 1s"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:03.332464",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as high"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:03.332464",
-    "step": "start_orchestration",
-    "message": "Issue classified as high"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:03.970069",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:03.973107",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:14.523297",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash on startup"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:14.526008",
-    "step": "mock_classify_issue",
-    "message": "Attempt 1 failed: Random tool error, retrying in 1s"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:15.527972",
-    "step": "mock_classify_issue",
-    "message": "Attempt 2 failed: Random tool error, retrying in 2s"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:17.530628",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:17.530628",
-    "step": "start_orchestration",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:17.684084",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:17.684084",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:23.434701",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash on startup"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:23.435789",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:23.435789",
-    "step": "start_orchestration",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:23.607635",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/test/repo/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T05:56:23.609918",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T06:06:20.653834",
-    "step": "start_orchestration",
-    "message": "Received issue: Translation Issue"
-  },
-  {
-    "timestamp": "2025-11-08T06:06:20.655877",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T06:06:20.658877",
-    "step": "start_orchestration",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T06:06:21.402651",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/n8n-io/n8n/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T06:06:21.410862",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T06:09:15.651535",
-    "step": "start_orchestration",
-    "message": "Received issue: Translation Issue"
-  },
-  {
-    "timestamp": "2025-11-08T06:09:15.653940",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T06:09:15.654938",
-    "step": "start_orchestration",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T06:09:16.336040",
-    "step": "start_orchestration",
-    "message": "README fetch failed: 404 Client Error: Not Found for url: https://github.com/n8n-io/n8n/raw/main/README.md"
-  },
-  {
-    "timestamp": "2025-11-08T06:09:16.339613",
-    "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T06:10:15.428899",
-    "step": "start_orchestration",
-    "message": "Received issue: Translation Issue"
-  },
-  {
-    "timestamp": "2025-11-08T06:10:15.428899",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T06:10:15.428899",
-    "step": "start_orchestration",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T06:10:16.237795",
+    "timestamp": "2025-11-08T11:57:05.018344",
     "step": "start_orchestration",
     "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
   },
   {
-    "timestamp": "2025-11-08T06:10:18.402306",
+    "timestamp": "2025-11-08T11:57:05.030480",
     "step": "start_orchestration",
     "message": "Indexed README into vector store"
   },
   {
-    "timestamp": "2025-11-08T06:10:18.402306",
+    "timestamp": "2025-11-08T11:57:05.037348",
     "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
+    "message": "Generated fix sketch and failing test skeleton"
   },
   {
-    "timestamp": "2025-11-08T06:11:05.437037",
+    "timestamp": "2025-11-08T11:57:05.041989",
     "step": "start_orchestration",
-    "message": "Received issue: Translation Issue"
+    "message": "Executor check for generated test: Syntax OK"
   },
   {
-    "timestamp": "2025-11-08T06:11:05.437037",
+    "timestamp": "2025-11-08T11:57:05.060613",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/e3fe0096"
+  },
+  {
+    "timestamp": "2025-11-08T12:14:29.503142",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-08T12:14:29.516112",
     "step": "mock_classify_issue",
-    "message": "Issue classified as medium"
+    "message": "Issue classified as high"
   },
   {
-    "timestamp": "2025-11-08T06:11:05.438937",
+    "timestamp": "2025-11-08T12:14:29.528172",
     "step": "start_orchestration",
-    "message": "Issue classified as medium"
+    "message": "Issue classified as high"
   },
   {
-    "timestamp": "2025-11-08T06:11:05.692068",
+    "timestamp": "2025-11-08T12:14:29.830783",
     "step": "start_orchestration",
     "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
   },
   {
-    "timestamp": "2025-11-08T06:11:05.694068",
+    "timestamp": "2025-11-08T12:14:29.892401",
     "step": "start_orchestration",
     "message": "Indexed README into vector store"
   },
   {
-    "timestamp": "2025-11-08T06:11:05.696065",
+    "timestamp": "2025-11-08T12:14:29.901224",
     "step": "start_orchestration",
-    "message": "Executor check: Syntax OK"
+    "message": "Generated fix sketch and failing test skeleton"
   },
   {
-    "timestamp": "2025-11-08T06:38:45.827673",
+    "timestamp": "2025-11-08T12:14:29.914349",
     "step": "start_orchestration",
-    "message": "Received issue: App crashes on login when I click Submit. Steps: 1) Open app 2) Login 3) Click Submit"
+    "message": "Executor check for generated test: Syntax OK"
   },
   {
-    "timestamp": "2025-11-08T06:38:45.827673",
+    "timestamp": "2025-11-08T12:14:29.952175",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/9c8195b3"
+  },
+  {
+    "timestamp": "2025-11-09T05:23:35.421741",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-09T05:23:35.445165",
     "step": "mock_classify_issue",
-    "message": "Issue classified as high"
+    "message": "Issue classified as low"
   },
   {
-    "timestamp": "2025-11-08T06:38:45.827673",
+    "timestamp": "2025-11-09T05:23:35.486464",
     "step": "start_orchestration",
-    "message": "Issue classified as high"
+    "message": "Issue classified as low"
   },
   {
-    "timestamp": "2025-11-08T06:38:46.116176",
+    "timestamp": "2025-11-09T05:23:35.941311",
     "step": "start_orchestration",
     "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
   },
   {
-    "timestamp": "2025-11-08T06:38:46.150152",
+    "timestamp": "2025-11-09T05:23:36.031504",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-09T05:23:36.094555",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-09T05:23:36.131166",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-09T05:23:36.246074",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/2d82a852"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:20.117746",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:20.151964",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:20.178941",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:20.556606",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:20.619889",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:20.653951",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:20.679374",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:20.805936",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/f73efbf2"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:22.893731",
+    "step": "start_orchestration",
+    "message": "Received issue: Sample crash on startup"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:22.927848",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:22.955822",
+    "step": "start_orchestration",
+    "message": "Issue classified as high"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:23.071086",
+    "step": "start_orchestration",
+    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:23.117511",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:23.146444",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:23.181997",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-09T05:24:23.293778",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/c80c0014"
+  },
+  {
+    "timestamp": "2025-11-09T05:34:23.932591",
+    "step": "start_orchestration",
+    "message": "Received issue: repeated complex calculation in audio buffer duration computation in CvCapture_MSMF::grabFrame()"
+  },
+  {
+    "timestamp": "2025-11-09T05:34:23.971207",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-09T05:34:24.005387",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-09T05:34:25.125095",
+    "step": "start_orchestration",
+    "message": "Fetched README from provided URL (https://github.com/opencv/opencv/blob/4.x/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-09T05:34:25.323980",
     "step": "start_orchestration",
     "message": "Error: Object of type ndarray is not JSON serializable"
   },
   {
-    "timestamp": "2025-11-08T06:39:17.596054",
+    "timestamp": "2025-11-09T05:37:27.838424",
     "step": "start_orchestration",
-    "message": "Received issue: App crashes on login when I click Submit. Steps: 1) Open app 2) Login 3) Click Submit"
+    "message": "Received issue: repeated complex calculation in audio buffer duration computation in CvCapture_MSMF::grabFrame()"
   },
   {
-    "timestamp": "2025-11-08T06:39:17.598066",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:17.598582",
-    "step": "start_orchestration",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:17.865219",
-    "step": "start_orchestration",
-    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:17.867425",
-    "step": "start_orchestration",
-    "message": "Indexed README into vector store"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:17.869396",
-    "step": "start_orchestration",
-    "message": "Generated fix sketch and failing test skeleton"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:17.873613",
-    "step": "start_orchestration",
-    "message": "Executor check for generated test: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:17.875386",
-    "step": "start_orchestration",
-    "message": "Created dry-run PR: dry://pr/84417db4"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:41.098619",
-    "step": "start_orchestration",
-    "message": "Received issue: Sample crash on startup"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:41.099604",
+    "timestamp": "2025-11-09T05:37:27.866504",
     "step": "mock_classify_issue",
     "message": "Attempt 1 failed: Random tool error, retrying in 1s"
   },
   {
-    "timestamp": "2025-11-08T06:39:42.100950",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:42.100950",
-    "step": "start_orchestration",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:42.341349",
-    "step": "start_orchestration",
-    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:42.346134",
-    "step": "start_orchestration",
-    "message": "Indexed README into vector store"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:42.347145",
-    "step": "start_orchestration",
-    "message": "Generated fix sketch and failing test skeleton"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:42.350213",
-    "step": "start_orchestration",
-    "message": "Executor check for generated test: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T06:39:42.350213",
-    "step": "start_orchestration",
-    "message": "Created dry-run PR: dry://pr/474eac00"
-  },
-  {
-    "timestamp": "2025-11-08T06:42:14.095317",
-    "step": "start_orchestration",
-    "message": "Received issue: App crashes on login when I click Submit. Steps: 1) Open app 2) Login 3) Click Submit"
-  },
-  {
-    "timestamp": "2025-11-08T06:42:14.097053",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as high"
-  },
-  {
-    "timestamp": "2025-11-08T06:42:14.097053",
-    "step": "start_orchestration",
-    "message": "Issue classified as high"
-  },
-  {
-    "timestamp": "2025-11-08T06:42:14.346397",
-    "step": "start_orchestration",
-    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
-  },
-  {
-    "timestamp": "2025-11-08T06:42:14.352728",
-    "step": "start_orchestration",
-    "message": "Indexed README into vector store"
-  },
-  {
-    "timestamp": "2025-11-08T06:42:14.352728",
-    "step": "start_orchestration",
-    "message": "Generated fix sketch and failing test skeleton"
-  },
-  {
-    "timestamp": "2025-11-08T06:42:14.355972",
-    "step": "start_orchestration",
-    "message": "Executor check for generated test: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T06:42:14.357941",
-    "step": "start_orchestration",
-    "message": "Created dry-run PR: dry://pr/9dec8527"
-  },
-  {
-    "timestamp": "2025-11-08T06:43:33.278308",
-    "step": "start_orchestration",
-    "message": "Received issue: App crashes on login when I click Submit. Steps: 1) Open app 2) Login 3) Click Submit"
-  },
-  {
-    "timestamp": "2025-11-08T06:43:33.282085",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T06:43:33.282614",
-    "step": "start_orchestration",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T06:43:33.530248",
-    "step": "start_orchestration",
-    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
-  },
-  {
-    "timestamp": "2025-11-08T06:43:33.536221",
-    "step": "start_orchestration",
-    "message": "Indexed README into vector store"
-  },
-  {
-    "timestamp": "2025-11-08T06:43:33.538842",
-    "step": "start_orchestration",
-    "message": "Generated fix sketch and failing test skeleton"
-  },
-  {
-    "timestamp": "2025-11-08T06:43:33.542255",
-    "step": "start_orchestration",
-    "message": "Executor check for generated test: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T06:43:33.544501",
-    "step": "start_orchestration",
-    "message": "Created dry-run PR: dry://pr/81c52c5f"
-  },
-  {
-    "timestamp": "2025-11-08T07:26:54.129788",
-    "step": "start_orchestration",
-    "message": "Received issue: Translation Issue"
-  },
-  {
-    "timestamp": "2025-11-08T07:26:54.142178",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T07:26:54.156251",
-    "step": "start_orchestration",
-    "message": "Issue classified as medium"
-  },
-  {
-    "timestamp": "2025-11-08T07:26:54.450828",
-    "step": "start_orchestration",
-    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
-  },
-  {
-    "timestamp": "2025-11-08T07:26:54.489505",
-    "step": "start_orchestration",
-    "message": "Error: Object of type ndarray is not JSON serializable"
-  },
-  {
-    "timestamp": "2025-11-08T07:27:01.383602",
-    "step": "start_orchestration",
-    "message": "Received issue: Translation Issue"
-  },
-  {
-    "timestamp": "2025-11-08T07:27:01.400876",
-    "step": "mock_classify_issue",
-    "message": "Attempt 1 failed: Random tool error, retrying in 1s"
-  },
-  {
-    "timestamp": "2025-11-08T07:27:02.416927",
+    "timestamp": "2025-11-09T05:37:28.906125",
     "step": "mock_classify_issue",
     "message": "Attempt 2 failed: Random tool error, retrying in 2s"
   },
   {
-    "timestamp": "2025-11-08T07:27:04.425997",
-    "step": "mock_classify_issue",
-    "message": "\u26a0\ufe0f Circuit breaker OPEN"
-  },
-  {
-    "timestamp": "2025-11-08T07:27:04.436295",
-    "step": "mock_classify_issue",
-    "message": "Attempt 3 failed: Random tool error, retrying in 4s"
-  },
-  {
-    "timestamp": "2025-11-08T07:27:08.445047",
-    "step": "start_orchestration",
-    "message": "Error: Function mock_classify_issue failed after 3 retries"
-  },
-  {
-    "timestamp": "2025-11-08T07:27:15.785369",
-    "step": "start_orchestration",
-    "message": "Received issue: Translation Issue"
-  },
-  {
-    "timestamp": "2025-11-08T07:27:15.804633",
-    "step": "mock_classify_issue",
-    "message": "Attempt 1 failed: Circuit open: Skipping mock_classify_issue, retrying in 1s"
-  },
-  {
-    "timestamp": "2025-11-08T07:27:16.820976",
-    "step": "mock_classify_issue",
-    "message": "Attempt 2 failed: Circuit open: Skipping mock_classify_issue, retrying in 2s"
-  },
-  {
-    "timestamp": "2025-11-08T07:27:18.831775",
-    "step": "mock_classify_issue",
-    "message": "Attempt 3 failed: Circuit open: Skipping mock_classify_issue, retrying in 4s"
-  },
-  {
-    "timestamp": "2025-11-08T07:27:22.858307",
-    "step": "start_orchestration",
-    "message": "Error: Function mock_classify_issue failed after 3 retries"
-  },
-  {
-    "timestamp": "2025-11-08T07:30:04.135142",
-    "step": "start_orchestration",
-    "message": "Received issue: Translation Issue"
-  },
-  {
-    "timestamp": "2025-11-08T07:30:04.150598",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T07:30:04.169295",
-    "step": "start_orchestration",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T07:30:04.473578",
-    "step": "start_orchestration",
-    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
-  },
-  {
-    "timestamp": "2025-11-08T07:30:04.511553",
-    "step": "start_orchestration",
-    "message": "Indexed README into vector store"
-  },
-  {
-    "timestamp": "2025-11-08T07:30:04.529548",
-    "step": "start_orchestration",
-    "message": "Generated fix sketch and failing test skeleton"
-  },
-  {
-    "timestamp": "2025-11-08T07:30:04.577080",
-    "step": "start_orchestration",
-    "message": "Executor check for generated test: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T07:30:04.654889",
-    "step": "start_orchestration",
-    "message": "Created dry-run PR: dry://pr/1a0ce3de"
-  },
-  {
-    "timestamp": "2025-11-08T11:29:50.390741",
-    "step": "start_orchestration",
-    "message": "Received issue: Translation Issue"
-  },
-  {
-    "timestamp": "2025-11-08T11:29:50.401857",
-    "step": "mock_classify_issue",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T11:29:50.410878",
-    "step": "start_orchestration",
-    "message": "Issue classified as low"
-  },
-  {
-    "timestamp": "2025-11-08T11:29:51.202295",
-    "step": "start_orchestration",
-    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
-  },
-  {
-    "timestamp": "2025-11-08T11:29:51.262849",
-    "step": "start_orchestration",
-    "message": "Indexed README into vector store"
-  },
-  {
-    "timestamp": "2025-11-08T11:29:51.298975",
-    "step": "start_orchestration",
-    "message": "Generated fix sketch and failing test skeleton"
-  },
-  {
-    "timestamp": "2025-11-08T11:29:51.328586",
-    "step": "start_orchestration",
-    "message": "Executor check for generated test: Syntax OK"
-  },
-  {
-    "timestamp": "2025-11-08T11:29:51.448307",
-    "step": "start_orchestration",
-    "message": "Created dry-run PR: dry://pr/db88619e"
-  },
-  {
-    "timestamp": "2025-11-08T11:30:02.993641",
-    "step": "start_orchestration",
-    "message": "Received issue: Translation Issue"
-  },
-  {
-    "timestamp": "2025-11-08T11:30:03.011839",
+    "timestamp": "2025-11-09T05:37:31.091691",
     "step": "mock_classify_issue",
     "message": "Issue classified as high"
   },
   {
-    "timestamp": "2025-11-08T11:30:03.027581",
+    "timestamp": "2025-11-09T05:37:31.147266",
     "step": "start_orchestration",
     "message": "Issue classified as high"
   },
   {
-    "timestamp": "2025-11-08T11:30:03.098860",
+    "timestamp": "2025-11-09T05:37:31.602204",
     "step": "start_orchestration",
-    "message": "Fetched README (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+    "message": "Fetched README from provided URL (https://github.com/opencv/opencv/blob/4.x/README.md) len=10000"
   },
   {
-    "timestamp": "2025-11-08T11:30:03.126855",
+    "timestamp": "2025-11-09T05:37:31.656101",
     "step": "start_orchestration",
     "message": "Indexed README into vector store"
   },
   {
-    "timestamp": "2025-11-08T11:30:03.140297",
+    "timestamp": "2025-11-09T05:37:31.680787",
     "step": "start_orchestration",
     "message": "Generated fix sketch and failing test skeleton"
   },
   {
-    "timestamp": "2025-11-08T11:30:03.154758",
+    "timestamp": "2025-11-09T05:37:31.705011",
     "step": "start_orchestration",
     "message": "Executor check for generated test: Syntax OK"
   },
   {
-    "timestamp": "2025-11-08T11:30:03.199085",
+    "timestamp": "2025-11-09T05:37:31.776540",
     "step": "start_orchestration",
-    "message": "Created dry-run PR: dry://pr/105ee90e"
+    "message": "Created dry-run PR: dry://pr/ffc568fa"
+  },
+  {
+    "timestamp": "2025-11-09T05:47:04.772108",
+    "step": "start_orchestration",
+    "message": "Received issue: repeated complex calculation in audio buffer duration computation in CvCapture_MSMF::grabFrame()"
+  },
+  {
+    "timestamp": "2025-11-09T05:47:04.789944",
+    "step": "mock_classify_issue",
+    "message": "Attempt 1 failed: Random tool error, retrying in 1s"
+  },
+  {
+    "timestamp": "2025-11-09T05:47:05.809303",
+    "step": "mock_classify_issue",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-09T05:47:05.834678",
+    "step": "start_orchestration",
+    "message": "Issue classified as medium"
+  },
+  {
+    "timestamp": "2025-11-09T05:47:06.133105",
+    "step": "start_orchestration",
+    "message": "Fetched README from provided URL (https://github.com/opencv/opencv/blob/4.x/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-09T05:47:06.186867",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-09T05:47:06.215143",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test skeleton"
+  },
+  {
+    "timestamp": "2025-11-09T05:47:06.244197",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-09T05:47:06.338951",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/d7af195b"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:28.370838",
+    "step": "start_orchestration",
+    "message": "Received issue: Cannot use the library when running in linux environment"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:28.410555",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-2.0-flash-exp"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:28.439282",
+    "step": "llm_agent",
+    "message": "Running in mock mode (Gemini not available or no API key)"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:28.509533",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:28.591577",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:28.629102",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:28.661757",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:28.686924",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-2.0-flash-exp and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:28.705088",
+    "step": "llm_classify",
+    "message": "Classified severity: high"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:28.726293",
+    "step": "start_orchestration",
+    "message": "Issue classified as high by LLM"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.235278",
+    "step": "start_orchestration",
+    "message": "Fetched README from provided URL (https://github.com/opencv/opencv/blob/4.x/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.322221",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.374056",
+    "step": "start_orchestration",
+    "message": "Found 1 relevant docs in vector store"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.415693",
+    "step": "llm_extract_repro",
+    "message": "Extracted 3 repro steps"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.464772",
+    "step": "start_orchestration",
+    "message": "Extracted 3 repro steps using LLM"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.518147",
+    "step": "llm_reasoning",
+    "message": "Iteration 1: Processing query"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.570919",
+    "step": "llm_reasoning",
+    "message": "Completed reasoning after 1 iterations"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.617615",
+    "step": "start_orchestration",
+    "message": "LLM reasoning completed with 1 iterations"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.668268",
+    "step": "start_orchestration",
+    "message": "Tool calls made: 0"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.694610",
+    "step": "llm_parse_error",
+    "message": "Failed to parse LLM response as JSON: Expecting value: line 1 column 1 (char 0)"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.716294",
+    "step": "llm_propose_fix",
+    "message": "Generated fix sketch (108 chars) and test code (177 chars)"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.736390",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test using LLM"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.756078",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-10T05:03:29.837915",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/26a3fd2b"
+  },
+  {
+    "timestamp": "2025-11-10T05:11:31.485087",
+    "step": "start_orchestration",
+    "message": "Received issue: Application severely crashes and deletes all the workflow files when booting into a linux environment"
+  },
+  {
+    "timestamp": "2025-11-10T05:11:31.512653",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:11:31.538066",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:11:31.565548",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:11:31.591651",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:11:31.623884",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:11:31.656033",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:11:31.678245",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:11:32.478070",
+    "step": "llm_error",
+    "message": "LLM API call failed: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+  },
+  {
+    "timestamp": "2025-11-10T05:11:32.558708",
+    "step": "start_orchestration",
+    "message": "Error: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+  },
+  {
+    "timestamp": "2025-11-10T05:14:38.289806",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:14:38.310785",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:14:38.343686",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:14:38.375057",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:14:38.405299",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:14:38.436807",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:14:38.482982",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:14:38.527678",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:14:39.260239",
+    "step": "llm_error",
+    "message": "LLM API call failed: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+  },
+  {
+    "timestamp": "2025-11-10T05:14:39.304525",
+    "step": "start_orchestration",
+    "message": "Error: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+  },
+  {
+    "timestamp": "2025-11-10T05:16:59.776664",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:16:59.807172",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:16:59.836368",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:16:59.860608",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:16:59.882209",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:16:59.901710",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:16:59.926529",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:16:59.946195",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:17:00.249181",
+    "step": "llm_error",
+    "message": "LLM API call failed: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+  },
+  {
+    "timestamp": "2025-11-10T05:17:00.279732",
+    "step": "start_orchestration",
+    "message": "Error: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+  },
+  {
+    "timestamp": "2025-11-10T05:18:52.735844",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:18:52.766125",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:18:52.797616",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:18:52.824706",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:18:52.853208",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:18:52.979391",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:18:53.034465",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:18:53.088715",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:18:53.816578",
+    "step": "llm_error",
+    "message": "LLM API call failed: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+  },
+  {
+    "timestamp": "2025-11-10T05:18:53.838150",
+    "step": "start_orchestration",
+    "message": "Error: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+  },
+  {
+    "timestamp": "2025-11-10T05:23:00.076733",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:23:00.101900",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:23:00.138687",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:23:00.175653",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:23:00.203820",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:23:00.257788",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:23:00.319484",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:23:00.411195",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:23:00.803619",
+    "step": "llm_error",
+    "message": "LLM API call failed: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+  },
+  {
+    "timestamp": "2025-11-10T05:23:00.841166",
+    "step": "start_orchestration",
+    "message": "Error: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods."
+  },
+  {
+    "timestamp": "2025-11-10T05:24:38.562946",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:24:38.590693",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:24:38.622469",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-2.0-flash-exp (requested: gemini-1.5-flash)"
+  },
+  {
+    "timestamp": "2025-11-10T05:24:38.662642",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:24:38.737309",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:24:38.781394",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:24:38.811483",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:24:38.837759",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:24:39.206386",
+    "step": "llm_error",
+    "message": "LLM API call failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 21"
+  },
+  {
+    "timestamp": "2025-11-10T05:24:39.239717",
+    "step": "start_orchestration",
+    "message": "Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 21.381327216s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.goo... (truncated)"
+  },
+  {
+    "timestamp": "2025-11-10T05:26:21.845693",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:26:21.880190",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:26:21.930630",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-2.0-flash-exp (requested: gemini-1.5-flash)"
+  },
+  {
+    "timestamp": "2025-11-10T05:26:21.983600",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:26:22.072007",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:26:22.117057",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:26:22.136994",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:26:22.178337",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:26:22.864213",
+    "step": "llm_error",
+    "message": "LLM API call failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 37"
+  },
+  {
+    "timestamp": "2025-11-10T05:26:22.892461",
+    "step": "start_orchestration",
+    "message": "Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 37.668239697s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.goo... (truncated)"
+  },
+  {
+    "timestamp": "2025-11-10T05:28:55.670793",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:28:55.702692",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:28:55.736767",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-2.0-flash-exp (requested: gemini-1.5-flash)"
+  },
+  {
+    "timestamp": "2025-11-10T05:28:55.765428",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:28:55.786481",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:28:55.811483",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:28:55.831079",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:28:55.858822",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:28:56.642513",
+    "step": "llm_error",
+    "message": "LLM API call failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 3."
+  },
+  {
+    "timestamp": "2025-11-10T05:28:56.666033",
+    "step": "start_orchestration",
+    "message": "Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 3.991963134s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.goog... (truncated)"
+  },
+  {
+    "timestamp": "2025-11-10T05:30:37.404663",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:30:37.435193",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-2.0-flash-exp"
+  },
+  {
+    "timestamp": "2025-11-10T05:30:37.477293",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-2.0-flash-exp (requested: gemini-2.0-flash-exp)"
+  },
+  {
+    "timestamp": "2025-11-10T05:30:37.537077",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:30:37.594678",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:30:37.649896",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:30:37.719862",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:30:37.756339",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-2.0-flash-exp and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:30:38.218580",
+    "step": "llm_error",
+    "message": "LLM API call failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 22"
+  },
+  {
+    "timestamp": "2025-11-10T05:30:38.248765",
+    "step": "start_orchestration",
+    "message": "Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 22.390232771s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.goo... (truncated)"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:08.663854",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:08.733998",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:08.772886",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-2.0-flash-exp (requested: gemini-1.5-flash)"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:08.854286",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:08.959037",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:09.075245",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:09.136966",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:09.249454",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:09.769878",
+    "step": "llm_error",
+    "message": "LLM API call failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 50"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:09.870312",
+    "step": "start_orchestration",
+    "message": "Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 50.827256802s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.goo... (truncated)"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:48.468794",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:48.503195",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:48.530286",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-2.0-flash-exp (requested: gemini-1.5-flash)"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:48.555650",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:48.611648",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:48.640956",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:48.667332",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:48.688737",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:48.940647",
+    "step": "llm_error",
+    "message": "LLM API call failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\nPlease retry in 11"
+  },
+  {
+    "timestamp": "2025-11-10T05:33:48.962923",
+    "step": "start_orchestration",
+    "message": "Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\nPlease retry in 11.578101766s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelan... (truncated)"
+  },
+  {
+    "timestamp": "2025-11-10T05:35:23.129801",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:35:23.167153",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:35:23.237503",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-2.0-flash-exp (requested: gemini-1.5-flash)"
+  },
+  {
+    "timestamp": "2025-11-10T05:35:23.303993",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:35:23.348019",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:35:23.399921",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:35:23.425207",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:35:23.446540",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:35:23.684025",
+    "step": "llm_error",
+    "message": "LLM API call failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 36"
+  },
+  {
+    "timestamp": "2025-11-10T05:35:23.715808",
+    "step": "start_orchestration",
+    "message": "Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 36.822468758s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.goo... (truncated)"
+  },
+  {
+    "timestamp": "2025-11-10T05:37:05.624489",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:37:05.651522",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:37:05.681871",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-2.0-flash-exp (requested: gemini-1.5-flash)"
+  },
+  {
+    "timestamp": "2025-11-10T05:37:05.707662",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:37:05.729669",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:37:05.817613",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:37:05.932347",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:37:06.076703",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:37:06.407641",
+    "step": "llm_error",
+    "message": "LLM API call failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\nPlease retry in 54"
+  },
+  {
+    "timestamp": "2025-11-10T05:37:06.431250",
+    "step": "start_orchestration",
+    "message": "Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\nPlease retry in 54.095985738s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_input_token_count\"\n  quota_id: \"GenerateContentInputTokensPerModelPerMinute-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelan... (truncated)"
+  },
+  {
+    "timestamp": "2025-11-10T05:39:23.735746",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:39:23.771340",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-1.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:39:23.807872",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-2.0-flash-exp (requested: gemini-1.5-flash)"
+  },
+  {
+    "timestamp": "2025-11-10T05:39:23.847492",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:39:23.915511",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:39:24.057866",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:39:24.090996",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:39:24.169917",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-1.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:39:24.684363",
+    "step": "llm_error",
+    "message": "LLM API call failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 35"
+  },
+  {
+    "timestamp": "2025-11-10T05:39:24.709571",
+    "step": "start_orchestration",
+    "message": "Error: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/usage?tab=rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0\nPlease retry in 35.913036385s. [links {\n  description: \"Learn more about Gemini API quotas\"\n  url: \"https://ai.google.dev/gemini-api/docs/rate-limits\"\n}\n, violations {\n  quota_metric: \"generativelanguage.googleapis.com/generate_content_free_tier_requests\"\n  quota_id: \"GenerateRequestsPerMinutePerProjectPerModel-FreeTier\"\n  quota_dimensions {\n    key: \"model\"\n    value: \"gemini-2.0-flash-exp\"\n  }\n  quota_dimensions {\n    key: \"location\"\n    value: \"global\"\n  }\n}\nviolations {\n  quota_metric: \"generativelanguage.goo... (truncated)"
+  },
+  {
+    "timestamp": "2025-11-10T05:41:07.287021",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:41:07.320688",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gpt-4o-mini"
+  },
+  {
+    "timestamp": "2025-11-10T05:41:07.455093",
+    "step": "llm_agent",
+    "message": "Initialized OpenAI client with model: gpt-4o-mini"
+  },
+  {
+    "timestamp": "2025-11-10T05:41:07.515954",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:41:07.548582",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:41:07.703690",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:41:07.772156",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:41:07.828594",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gpt-4o-mini and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:41:09.058717",
+    "step": "llm_error",
+    "message": "LLM API call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: null. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}"
+  },
+  {
+    "timestamp": "2025-11-10T05:41:09.087496",
+    "step": "start_orchestration",
+    "message": "Error: Error code: 401 - {'error': {'message': 'Incorrect API key provided: null. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:30.445892",
+    "step": "start_orchestration",
+    "message": "Received issue: Crashes severely when using in a linux based environment even deletes all the files in the worktree"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:30.508090",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-2.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:30.580899",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-2.0-flash-exp (requested: gemini-2.5-flash)"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:30.657884",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:30.695806",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:30.725733",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:30.764588",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:30.792896",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-2.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:31.062719",
+    "step": "llm_error",
+    "message": "Model gemini-2.5-flash not found. Available Gemini models: gemini-2.0-flash-exp, gemini-1.5-pro"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:31.128259",
+    "step": "llm_fallback",
+    "message": "LLM API call failed, falling back to mock mode. Error: Model gemini-2.5-flash is not available. Try: gemini-2.0-flash-exp or gemini-1.5-pro"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:31.190838",
+    "step": "llm_classify",
+    "message": "Classified severity: high"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:31.268543",
+    "step": "start_orchestration",
+    "message": "Issue classified as high by LLM"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:32.281915",
+    "step": "start_orchestration",
+    "message": "Fetched README from provided URL (https://github.com/Tanishthar/music-control/blob/main/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-10T05:47:32.426449",
+    "step": "start_orchestration",
+    "message": "Error: Object of type ndarray is not JSON serializable"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:25.877966",
+    "step": "start_orchestration",
+    "message": "Received issue: Critical issue when the application launches screen flashes multiple times and then blanks out into nothing until we exit with task manager"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:25.915555",
+    "step": "start_orchestration",
+    "message": "Using LLM model: gemini-2.5-flash"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:25.956259",
+    "step": "llm_agent",
+    "message": "Initialized Gemini client with model: gemini-2.0-flash-exp (requested: gemini-2.5-flash)"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:25.989343",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:26.021501",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:26.048675",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:26.076329",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:26.109639",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model gemini-2.5-flash and tools"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:26.436002",
+    "step": "llm_fallback",
+    "message": "Quota/rate limit exceeded, falling back to mock mode. Error: Gemini quota/rate limit exceeded: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/ra"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:26.509901",
+    "step": "llm_classify",
+    "message": "Classified severity: high"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:26.544177",
+    "step": "start_orchestration",
+    "message": "Issue classified as high by LLM"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:26.988087",
+    "step": "start_orchestration",
+    "message": "Fetched README from provided URL (https://github.com/Tanishthar/music-control/blob/main/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.053150",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.095611",
+    "step": "start_orchestration",
+    "message": "Found 1 relevant docs in vector store"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.269081",
+    "step": "llm_fallback",
+    "message": "Quota/rate limit exceeded, falling back to mock mode. Error: Gemini quota/rate limit exceeded: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/ra"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.313269",
+    "step": "llm_extract_repro",
+    "message": "Extracted 3 repro steps"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.343789",
+    "step": "start_orchestration",
+    "message": "Extracted 3 repro steps using LLM"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.370873",
+    "step": "llm_reasoning",
+    "message": "Iteration 1: Processing query"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.547628",
+    "step": "llm_fallback",
+    "message": "Quota/rate limit exceeded, falling back to mock mode. Error: Gemini quota/rate limit exceeded: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/ra"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.580099",
+    "step": "llm_reasoning",
+    "message": "Completed reasoning after 1 iterations"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.608964",
+    "step": "start_orchestration",
+    "message": "LLM reasoning completed with 1 iterations"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.637146",
+    "step": "start_orchestration",
+    "message": "Tool calls made: 0"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.874965",
+    "step": "llm_fallback",
+    "message": "Quota/rate limit exceeded, falling back to mock mode. Error: Gemini quota/rate limit exceeded: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/ra"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.906135",
+    "step": "llm_parse_error",
+    "message": "Failed to parse LLM response as JSON: Expecting value: line 1 column 1 (char 0)"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.937969",
+    "step": "llm_propose_fix",
+    "message": "Generated fix sketch (108 chars) and test code (221 chars)"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:27.974749",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test using LLM"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:28.021787",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-10T05:50:28.128250",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/ef64c3f1"
   }
 ]

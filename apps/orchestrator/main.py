@@ -7,13 +7,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List
 
-from packages.tools.mock_tool import mock_classify_issue
 from packages.agents.reliability import log_step
 from packages.ws.manager import manager as ws_manager
 from packages.tools import http_fetcher, vector_store, executor
 from packages.eval import harness as eval_harness
-from packages.agents.fix_proposer import extract_repro_steps, propose_fix_sketch
 from packages.tools.github_mock import create_dry_pr
+from packages.agents.llm_agent import LLMAgent
+from packages.agents.tool_wrappers import register_all_tools
 
 app = FastAPI(title="Issue Triage Orchestrator", version="0.5.0")
 
@@ -41,6 +41,7 @@ class OrchestratorState(BaseModel):
     repo_url: str
     issue_text: str
     readme_file_path: Optional[str] = None  # Optional: URL or local file path to README
+    model: Optional[str] = "gpt-4o-mini"  # LLM model to use: gpt-4o-mini, gemini-2.0-flash-exp, etc.
     severity: Optional[str] = None
     repro_steps: Optional[str] = None
     proposed_fix: Optional[str] = None
@@ -55,11 +56,20 @@ async def root():
 async def start_orchestration(state: OrchestratorState):
     try:
         log_step("start_orchestration", f"Received issue: {state.issue_text}")
+        
+        # Get model from state or default
+        model = state.model or "gpt-4o-mini"
+        log_step("start_orchestration", f"Using LLM model: {model}")
 
-        # 1) classify severity
-        severity = mock_classify_issue(state.issue_text)
+        # Initialize LLM agent with selected model
+        agent = LLMAgent(model=model)
+        register_all_tools(agent)
+        log_step("start_orchestration", f"Initialized LLM agent with model {model} and tools")
+
+        # 1) classify severity using LLM
+        severity = agent.classify_severity(state.issue_text, state.repo_url)
         state.severity = severity
-        log_step("start_orchestration", f"Issue classified as {severity}")
+        log_step("start_orchestration", f"Issue classified as {severity} by LLM")
 
         # 2) fetch repo README (best-effort)
         readme_result = None
@@ -101,14 +111,70 @@ async def start_orchestration(state: OrchestratorState):
 
         # 3) index README into vector store (if fetched)
         vs = vector_store.MockVectorStore()
+        vector_search_results = None
         if readme_result.get("fetched"):
             vs.add(f"{state.repo_url}::readme", readme_text)
             log_step("start_orchestration", "Indexed README into vector store")
+            
+            # Optionally search vector store for relevant context
+            try:
+                search_results = vs.search(state.issue_text[:200], top_k=2)
+                vector_search_results = [{"doc_id": doc_id, "score": score} for doc_id, score in search_results]
+                log_step("start_orchestration", f"Found {len(vector_search_results)} relevant docs in vector store")
+            except Exception as e:
+                log_step("start_orchestration", f"Vector search failed: {str(e)[:200]}")
 
-        # 4) propose fix sketch + failing test (using proposer)
-        repro_steps = extract_repro_steps(state.issue_text)
-        fix_sketch, failing_test_code = propose_fix_sketch(state.severity, repro_steps, repo_readme=readme_text)
-        log_step("start_orchestration", "Generated fix sketch and failing test skeleton")
+        # 4) extract repro steps and propose fix using LLM
+        repro_steps = agent.extract_repro_steps(state.issue_text)
+        log_step("start_orchestration", f"Extracted {len(repro_steps)} repro steps using LLM")
+        
+        # Build context for fix proposal
+        context = {
+            "readme_fetched": readme_result.get("fetched", False),
+            "vector_search_results": vector_search_results
+        }
+        
+        # Use LLM to propose fix with tool-driven reasoning if needed
+        if readme_result.get("fetched") and len(readme_text) > 100:
+            # Use tool-driven reasoning for complex issues
+            reasoning_query = f"""Analyze this GitHub issue and propose a fix:
+
+Repository: {state.repo_url}
+Issue: {state.issue_text}
+Severity: {severity}
+Repro Steps: {chr(10).join(f"{i+1}. {step}" for i, step in enumerate(repro_steps))}
+
+You can use tools to:
+1. Search the documentation for relevant context
+2. Fetch additional information if needed
+3. Check code syntax
+
+After gathering context, propose a fix sketch and generate a failing pytest test."""
+            
+            reasoning_result = agent.reason_with_tools(reasoning_query, max_iterations=3)
+            log_step("start_orchestration", f"LLM reasoning completed with {reasoning_result.get('iterations', 0)} iterations")
+            log_step("start_orchestration", f"Tool calls made: {len(reasoning_result.get('tool_calls', []))}")
+            
+            # Extract fix from reasoning or fall back to direct proposal
+            if reasoning_result.get("answer"):
+                # Try to extract fix from reasoning answer
+                fix_sketch, failing_test_code = agent.propose_fix(
+                    state.issue_text, severity, repro_steps, 
+                    repo_readme=readme_text, context=context
+                )
+            else:
+                fix_sketch, failing_test_code = agent.propose_fix(
+                    state.issue_text, severity, repro_steps, 
+                    repo_readme=readme_text, context=context
+                )
+        else:
+            # Direct proposal without tool reasoning
+            fix_sketch, failing_test_code = agent.propose_fix(
+                state.issue_text, severity, repro_steps, 
+                repo_readme=readme_text, context=context
+            )
+        
+        log_step("start_orchestration", "Generated fix sketch and failing test using LLM")
 
         # 5) syntax-check the generated failing test
         exec_check = executor.syntax_check(failing_test_code)
@@ -143,7 +209,8 @@ async def start_orchestration(state: OrchestratorState):
             "executor_check": exec_check,
             "metrics": metrics,
             "pr_result": pr_result,
-            "message": "Run completed (dry-run)."
+            "message": "Run completed with LLM agent.",
+            "llm_mode": "real" if not agent.use_mock else "mock"
         }
 
     except Exception as e:

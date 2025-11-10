@@ -9,9 +9,15 @@ mkdir -p "$OUT_DIR"
 mkdir -p "$DRYPRS_DIR"
 
 declare -a ISSUES=(
-  "Repo: sample-repo-1 | Issue: 'App crashes on startup when config has empty value. Steps: open app, click start.'"
-  "Repo: sample-repo-2 | Issue: 'Unit tests failing intermittently in CI after dependency upgrade to x.y.z. Steps: run pytest -k integration.'"
-  "Repo: sample-repo-3 | Issue: 'Feature X returns incorrect values for edge-case input. Steps: call /api/value?x=9999.'"
+  "Repo: https://github.com/pcqpcq/open-source-android-apps |
+  Issue: 'bcdboot.exe failed with code -1073741510!'|
+  README : https://github.com/pcqpcq/open-source-android-apps/blob/master/README.md "
+  "Repo: https://github.com/tortuvshin/open-source-flutter-apps | 
+  Issue: 'App crashes on startup!' |
+  README : https://github.com/tortuvshin/open-source-flutter-apps/blob/main/README.md "
+  "Repo: https://github.com/opencv/opencv | 
+  Issue : 'repeated complex calculation in audio buffer duration computation in CvCapture_MSMF::grabFrame()' |
+  README: https://github.com/opencv/opencv/blob/4.x/README.md "
 )
 
 timestamp() { date +%Y%m%dT%H%M%S; }

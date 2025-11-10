@@ -25,6 +25,7 @@ export default function DashboardPage() {
   const [repoUrl, setRepoUrl] = useState("");
   const [issueText, setIssueText] = useState("");
   const [readmePath, setReadmePath] = useState("");
+  const [selectedModel, setSelectedModel] = useState("gpt-4o-mini");
 
   // Start a run by hitting POST /start
   async function startRun(e?: React.FormEvent) {
@@ -45,6 +46,7 @@ export default function DashboardPage() {
       const payload: any = {
         repo_url: repoUrl.trim(),
         issue_text: issueText.trim(),
+        model: selectedModel,  // Include selected model
       };
       
       // Add optional readme_file_path if provided
@@ -304,6 +306,27 @@ export default function DashboardPage() {
               />
               <p className="mt-1 text-xs text-gray-500">
                 Leave empty to auto-detect from repository, or provide a URL or local file path
+              </p>
+            </div>
+
+            <div>
+              <label htmlFor="model-select" className="block text-sm font-medium text-gray-700 mb-1">
+                LLM Model <span className="text-gray-500 text-xs">(Select AI model)</span>
+              </label>
+              <select
+                id="model-select"
+                value={selectedModel}
+                onChange={(e) => setSelectedModel(e.target.value)}
+                disabled={running}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 bg-white"
+              >
+                <option value="gpt-4o-mini">GPT-4o Mini (OpenAI) - Default</option>
+                <option value="gemini-2.5-flash">Gemini 2.5 Flash (Google) - Maps to 2.0 Flash</option>
+                <option value="gemini-2.0-flash-exp">Gemini 2.0 Flash Experimental (Google)</option>
+                <option value="gemini-1.5-pro">Gemini 1.5 Pro (Google)</option>
+              </select>
+              <p className="mt-1 text-xs text-gray-500">
+                Choose the AI model for issue triage. Requires API keys: OPENAI_API_KEY for GPT models, GEMINI_API_KEY for Gemini models.
               </p>
             </div>
 

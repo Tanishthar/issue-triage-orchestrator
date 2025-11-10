@@ -1,0 +1,16 @@
+{
+  "detail": [
+    {
+      "type": "missing",
+      "loc": [
+        "body",
+        "repo_url"
+      ],
+      "msg": "Field required",
+      "input": {
+        "repo": "sample-repo-1",
+        "issue_text": "Repo: https://github.com/tortuvshin/open-source-flutter-apps | \n  Issue: 'App crashes on startup!' |\n  README : https://github.com/tortuvshin/open-source-flutter-apps/blob/main/README.md "
+      }
+    }
+  ]
+}
