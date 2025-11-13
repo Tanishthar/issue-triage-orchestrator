@@ -41,10 +41,13 @@ def run_demo():
     """Run a demonstrable LLM agent workflow"""
     
     # Sample issue for demonstration
+    # Use Ollama model if specified via environment variable, otherwise default
+    model = os.getenv("LLM_MODEL", "ollama:llama3.1")
     demo_issue = {
         "repo_url": "https://github.com/n8n-io/n8n",
         "issue_text": "The application crashes on startup when the database connection fails. Error: 'Connection refused'. This happens when the database service is not running.",
-        "readme_file_path": None  # Will auto-detect
+        "readme_file_path": None,  # Will auto-detect
+        "model": model
     }
     
     run_id = f"llm-demo-{timestamp()}"
@@ -55,7 +58,8 @@ def run_demo():
     print(f"LLM Agent Demo Run: {run_id}")
     print(f"{'='*60}\n")
     print(f"Repository: {demo_issue['repo_url']}")
-    print(f"Issue: {demo_issue['issue_text']}\n")
+    print(f"Issue: {demo_issue['issue_text']}")
+    print(f"Model: {demo_issue.get('model', 'gpt-4o-mini')}\n")
     
     # Save input
     with open(run_dir / "input.json", "w") as f:

@@ -27,15 +27,38 @@ for i in "${!ISSUES[@]}"; do
   RUN_DIR="${OUT_DIR}/${RUN_ID}"
   mkdir -p "$RUN_DIR"
 
-  ISSUE_TEXT="${ISSUES[$i]}"
+  ISSUE_ENTRY="${ISSUES[$i]}"
+  
+  # Parse the issue entry to extract repo_url, issue_text, and readme_file_path
+  # Format: "Repo: <url> | Issue: '<text>' | README : <url>"
+  # Use sed for portability (works on macOS and Linux)
+  REPO_URL=$(echo "$ISSUE_ENTRY" | sed -n "s/.*Repo:\s*\([^|]*\).*/\1/p" | xargs)
+  ISSUE_TEXT=$(echo "$ISSUE_ENTRY" | sed -n "s/.*Issue:\s*'\([^']*\)'.*/\1/p" | head -1)
+  README_PATH=$(echo "$ISSUE_ENTRY" | sed -n "s/.*README\s*:\s*\([^|]*\).*/\1/p" | xargs)
+  
+  # Fallback if parsing fails
+  if [ -z "$REPO_URL" ]; then
+    REPO_URL="https://github.com/example/repo"
+  fi
+  if [ -z "$ISSUE_TEXT" ]; then
+    ISSUE_TEXT="$ISSUE_ENTRY"
+  fi
 
   echo "=== Starting sample run: $RUN_ID ==="
+  echo "Repo URL: $REPO_URL"
   echo "Issue text: $ISSUE_TEXT"
+  echo "README path: ${README_PATH:-(none)}"
 
-  # POST to /start — adjust payload shape if your API uses different keys
-  RESPONSE=$(curl -sS -X POST "${API}/start" \
-    -H "Content-Type: application/json" \
-    -d "$(jq -n --arg repo "sample-repo-${i}" --arg issue "$ISSUE_TEXT" '{repo:$repo, issue_text:$issue}')" )
+  # POST to /start with repo_url and optional readme_file_path
+  if [ -n "$README_PATH" ]; then
+    RESPONSE=$(curl -sS -X POST "${API}/start" \
+      -H "Content-Type: application/json" \
+      -d "$(jq -n --arg repo_url "$REPO_URL" --arg issue "$ISSUE_TEXT" --arg readme "$README_PATH" '{repo_url:$repo_url, issue_text:$issue, readme_file_path:$readme}')" )
+  else
+    RESPONSE=$(curl -sS -X POST "${API}/start" \
+      -H "Content-Type: application/json" \
+      -d "$(jq -n --arg repo_url "$REPO_URL" --arg issue "$ISSUE_TEXT" '{repo_url:$repo_url, issue_text:$issue}')" )
+  fi
 
   echo "$RESPONSE" | jq '.' > "${RUN_DIR}/response.json"
   echo "Saved response to ${RUN_DIR}/response.json"

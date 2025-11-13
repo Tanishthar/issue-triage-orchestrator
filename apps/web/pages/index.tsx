@@ -25,7 +25,7 @@ export default function DashboardPage() {
   const [repoUrl, setRepoUrl] = useState("");
   const [issueText, setIssueText] = useState("");
   const [readmePath, setReadmePath] = useState("");
-  const [selectedModel, setSelectedModel] = useState("gpt-4o-mini");
+  const [selectedModel, setSelectedModel] = useState("ollama:llama3.1");
 
   // Start a run by hitting POST /start
   async function startRun(e?: React.FormEvent) {
@@ -320,13 +320,11 @@ export default function DashboardPage() {
                 disabled={running}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 bg-white"
               >
-                <option value="gpt-4o-mini">GPT-4o Mini (OpenAI) - Default</option>
-                <option value="gemini-2.5-flash">Gemini 2.5 Flash (Google) - Maps to 2.0 Flash</option>
-                <option value="gemini-2.0-flash-exp">Gemini 2.0 Flash Experimental (Google)</option>
-                <option value="gemini-1.5-pro">Gemini 1.5 Pro (Google)</option>
+                <option value="ollama:llama3.1">Llama 3.1 (Ollama - Local) - Default</option>
+                <option value="gemini-2.5-flash">Gemini 2.5 Flash (Google)</option>
               </select>
               <p className="mt-1 text-xs text-gray-500">
-                Choose the AI model for issue triage. Requires API keys: OPENAI_API_KEY for GPT models, GEMINI_API_KEY for Gemini models.
+                Choose the AI model for issue triage. Requires GEMINI_API_KEY for Gemini models. For Ollama models, ensure Ollama is running locally at http://localhost:11434.
               </p>
             </div>
 

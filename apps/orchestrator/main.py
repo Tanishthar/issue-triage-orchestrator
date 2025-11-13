@@ -1,11 +1,20 @@
 import os
 import json
+import sys
+import asyncio
+
+# Fix for Windows event loop policy
+# This ensures httpx.AsyncClient works properly in FastAPI on Windows
+if sys.platform == 'win32':
+    # Use WindowsSelectorEventLoopPolicy instead of WindowsProactorEventLoopPolicy
+    # ProactorEventLoop can cause issues with asyncio subprocess and some async operations
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 from packages.agents.reliability import log_step
 from packages.ws.manager import manager as ws_manager
@@ -15,9 +24,19 @@ from packages.tools.github_mock import create_dry_pr
 from packages.agents.llm_agent import LLMAgent
 from packages.agents.tool_wrappers import register_all_tools
 
+# Try to import httpx for Ollama healthcheck
+try:
+    import httpx
+    HTTPX_AVAILABLE = True
+except ImportError:
+    HTTPX_AVAILABLE = False
+
 app = FastAPI(title="Issue Triage Orchestrator", version="0.5.0")
 
 LOG_FILE = "metrics/step_logs.json"
+
+# Global variable to store Ollama probe status
+_ollama_probe_status: Optional[Dict] = None
 
 # --- CORS Configuration ---
 
@@ -41,16 +60,84 @@ class OrchestratorState(BaseModel):
     repo_url: str
     issue_text: str
     readme_file_path: Optional[str] = None  # Optional: URL or local file path to README
-    model: Optional[str] = "gpt-4o-mini"  # LLM model to use: gpt-4o-mini, gemini-2.0-flash-exp, etc.
+    model: Optional[str] = "ollama:llama3.1"  # LLM model to use: ollama:llama3.1 (default) or gemini-2.5-flash
     severity: Optional[str] = None
-    repro_steps: Optional[str] = None
+    repro_steps: Optional[List[str]] = None  # Changed from Optional[str] to Optional[List[str]]
     proposed_fix: Optional[str] = None
     pr_url: Optional[str] = None
     status: str = "initialized"
 
+def _probe_ollama() -> Dict:
+    """Probe Ollama connectivity and return status"""
+    ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
+    probe_urls = [
+        ollama_base_url,
+        ollama_base_url.replace("127.0.0.1", "localhost") if "127.0.0.1" in ollama_base_url else ollama_base_url.replace("localhost", "127.0.0.1"),
+        "http://host.docker.internal:11434"
+    ]
+    
+    if not HTTPX_AVAILABLE:
+        return {
+            "status": "error",
+            "message": "httpx not available",
+            "ollama_base_url": ollama_base_url,
+            "probe_urls": probe_urls
+        }
+    
+    for url in probe_urls:
+        try:
+            with httpx.Client(timeout=5.0) as client:
+                response = client.get(f"{url}/api/tags")
+                response.raise_for_status()
+                # Try to get model list
+                models = []
+                try:
+                    data = response.json()
+                    if "models" in data:
+                        models = [m.get("name", "") for m in data["models"]]
+                except:
+                    pass
+                return {
+                    "status": "healthy",
+                    "ollama_base_url": url,
+                    "probe_urls": probe_urls,
+                    "models": models,
+                    "message": f"Ollama is reachable at {url}"
+                }
+        except Exception as e:
+            continue
+    
+    return {
+        "status": "unhealthy",
+        "ollama_base_url": ollama_base_url,
+        "probe_urls": probe_urls,
+        "message": f"Ollama is not reachable at any of the probe URLs: {probe_urls}",
+        "error": "Connection failed to all probe URLs"
+    }
+
+@app.on_event("startup")
+async def startup_event():
+    """Probe Ollama at startup"""
+    global _ollama_probe_status
+    _ollama_probe_status = _probe_ollama()
+    log_step("startup", f"Ollama probe status: {_ollama_probe_status.get('status')} - {_ollama_probe_status.get('message')}")
+
 @app.get("/")
 async def root():
     return {"message": "Issue Triage Orchestrator running 🚀"}
+
+@app.get("/health")
+async def healthcheck():
+    """Lightweight healthcheck endpoint that probes Ollama and returns probe status"""
+    global _ollama_probe_status
+    # Re-probe on each request for real-time status
+    probe_status = _probe_ollama()
+    _ollama_probe_status = probe_status
+    return {
+        "service": "issue-triage-orchestrator",
+        "status": "running",
+        "ollama": probe_status
+    }
 
 @app.post("/start")
 async def start_orchestration(state: OrchestratorState):
@@ -58,16 +145,20 @@ async def start_orchestration(state: OrchestratorState):
         log_step("start_orchestration", f"Received issue: {state.issue_text}")
         
         # Get model from state or default
-        model = state.model or "gpt-4o-mini"
+        model = state.model or "ollama:llama3.1"
         log_step("start_orchestration", f"Using LLM model: {model}")
 
-        # Initialize LLM agent with selected model
-        agent = LLMAgent(model=model)
+        # Get Ollama base URL from environment or use default
+        # Use 127.0.0.1 for better Windows compatibility
+        ollama_base_url = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
+
+        # Initialize LLM agent with selected model and Ollama base URL
+        agent = LLMAgent(model=model, ollama_base_url=ollama_base_url)
         register_all_tools(agent)
-        log_step("start_orchestration", f"Initialized LLM agent with model {model} and tools")
+        log_step("start_orchestration", f"Initialized LLM agent with model {model} (base_url: {ollama_base_url}) and tools")
 
         # 1) classify severity using LLM
-        severity = agent.classify_severity(state.issue_text, state.repo_url)
+        severity = await agent.classify_severity(state.issue_text, state.repo_url)
         state.severity = severity
         log_step("start_orchestration", f"Issue classified as {severity} by LLM")
 
@@ -125,7 +216,8 @@ async def start_orchestration(state: OrchestratorState):
                 log_step("start_orchestration", f"Vector search failed: {str(e)[:200]}")
 
         # 4) extract repro steps and propose fix using LLM
-        repro_steps = agent.extract_repro_steps(state.issue_text)
+        repro_steps = await agent.extract_repro_steps(state.issue_text)
+        state.repro_steps = repro_steps  # Assign list to state
         log_step("start_orchestration", f"Extracted {len(repro_steps)} repro steps using LLM")
         
         # Build context for fix proposal
@@ -151,26 +243,26 @@ You can use tools to:
 
 After gathering context, propose a fix sketch and generate a failing pytest test."""
             
-            reasoning_result = agent.reason_with_tools(reasoning_query, max_iterations=3)
+            reasoning_result = await agent.reason_with_tools(reasoning_query, max_iterations=3)
             log_step("start_orchestration", f"LLM reasoning completed with {reasoning_result.get('iterations', 0)} iterations")
             log_step("start_orchestration", f"Tool calls made: {len(reasoning_result.get('tool_calls', []))}")
-            
+
             # Extract fix from reasoning or fall back to direct proposal
             if reasoning_result.get("answer"):
                 # Try to extract fix from reasoning answer
-                fix_sketch, failing_test_code = agent.propose_fix(
-                    state.issue_text, severity, repro_steps, 
+                fix_sketch, failing_test_code = await agent.propose_fix(
+                    state.issue_text, severity, repro_steps,
                     repo_readme=readme_text, context=context
                 )
             else:
-                fix_sketch, failing_test_code = agent.propose_fix(
-                    state.issue_text, severity, repro_steps, 
+                fix_sketch, failing_test_code = await agent.propose_fix(
+                    state.issue_text, severity, repro_steps,
                     repo_readme=readme_text, context=context
                 )
         else:
             # Direct proposal without tool reasoning
-            fix_sketch, failing_test_code = agent.propose_fix(
-                state.issue_text, severity, repro_steps, 
+            fix_sketch, failing_test_code = await agent.propose_fix(
+                state.issue_text, severity, repro_steps,
                 repo_readme=readme_text, context=context
             )
         
