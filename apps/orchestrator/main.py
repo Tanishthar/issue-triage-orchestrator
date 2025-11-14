@@ -60,7 +60,7 @@ class OrchestratorState(BaseModel):
     repo_url: str
     issue_text: str
     readme_file_path: Optional[str] = None  # Optional: URL or local file path to README
-    model: Optional[str] = "ollama:llama3.1"  # LLM model to use: ollama:llama3.1 (default) or gemini-2.5-flash
+    model: Optional[str] = "ollama:llama3.1"  # LLM model to use: ollama:llama3.1 (default), gpt-4o-mini, gemini-2.0-flash-exp, etc.
     severity: Optional[str] = None
     repro_steps: Optional[List[str]] = None  # Changed from Optional[str] to Optional[List[str]]
     proposed_fix: Optional[str] = None

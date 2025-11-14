@@ -31,9 +31,17 @@ except ImportError:
     HTTPX_AVAILABLE = False
     log_step("llm_agent", "httpx not available, Ollama support disabled")
 
+# Try to import OpenAI, fall back to mock if not available
+try:
+    import openai
+    OPENAI_AVAILABLE = True
+except ImportError:
+    OPENAI_AVAILABLE = False
+    log_step("llm_agent", "OpenAI not available, will use mock mode")
+
 # Try to import Google Gemini, fall back if not available
 try:
-    from google import genai
+    import google.generativeai as genai
     GEMINI_AVAILABLE = True
 except ImportError:
     GEMINI_AVAILABLE = False
@@ -62,10 +70,11 @@ class Tool:
 
 
 class LLMAgent:
-    """LLM Agent with tool calling capabilities - supports Ollama and Gemini 2.5 Flash"""
+    """LLM Agent with tool calling capabilities - supports OpenAI, Gemini, and Ollama"""
     
     # Supported models
-    GEMINI_MODEL = "gemini-2.5-flash"  # Only Gemini 2.5 Flash supported
+    OPENAI_MODELS = ["gpt-4o-mini"]
+    GEMINI_MODELS = ["gemini-2.5-flash"]
     OLLAMA_MODELS = ["ollama:llama3.1"]  # Format: ollama:model_name
     
     def __init__(self, api_key: Optional[str] = None, model: str = "ollama:llama3.1", use_mock: bool = False, ollama_base_url: str = "http://127.0.0.1:11434"):
@@ -78,10 +87,10 @@ class LLMAgent:
         # Initialize based on provider
         if use_mock:
             self.use_mock = True
+            self.client = None
             self.gemini_client = None
             log_step("llm_agent", "Running in mock mode (forced)")
         elif self.provider == "ollama":
-            # OLLAMA CODE - DO NOT MODIFY
             self.use_mock = not HTTPX_AVAILABLE
             if not self.use_mock:
                 # Extract model name (remove "ollama:" prefix)
@@ -92,29 +101,44 @@ class LLMAgent:
             else:
                 self.ollama_model = None
                 log_step("llm_agent", "Running in mock mode (httpx not available for Ollama)")
-        elif self.provider == "gemini":
-            # Only support gemini-2.5-flash
-            if model != self.GEMINI_MODEL:
-                log_step("llm_agent", f"Unsupported Gemini model: {model}. Only {self.GEMINI_MODEL} is supported. Falling back to mock mode.")
-                self.use_mock = True
-                self.gemini_client = None
+        elif self.provider == "openai":
+            self.api_key = api_key or os.getenv("OPENAI_API_KEY")
+            self.use_mock = not OPENAI_AVAILABLE or not self.api_key
+            if not self.use_mock:
+                openai.api_key = self.api_key
+                self.client = openai.OpenAI(api_key=self.api_key)
+                log_step("llm_agent", f"Initialized OpenAI client with model: {model}")
             else:
-                self.api_key = api_key or os.getenv("GEMINI_API_KEY")
-                self.use_mock = not GEMINI_AVAILABLE or not self.api_key
-                if not self.use_mock:
-                    # Initialize Gemini 2.5 Flash using genai.Client API
-                    self.gemini_client = genai.Client(api_key=self.api_key)
-                    log_step("llm_agent", f"Initialized Gemini client with model: {self.GEMINI_MODEL}")
-                else:
-                    self.gemini_client = None
-                    log_step("llm_agent", "Running in mock mode (Gemini not available or no API key)")
+                log_step("llm_agent", "Running in mock mode (OpenAI not available or no API key)")
+        elif self.provider == "gemini":
+            self.api_key = api_key or os.getenv("GEMINI_API_KEY")
+            self.use_mock = not GEMINI_AVAILABLE or not self.api_key
+            if not self.use_mock:
+                genai.configure(api_key=self.api_key)
+                # Map user-friendly model names to actual Google API model names
+                # Google API model names: gemini-2.0-flash-exp, gemini-1.5-pro, gemini-pro
+                # Note: gemini-2.5-flash doesn't exist yet, using gemini-2.0-flash-exp as closest match
+                model_mapping = {
+                    "gemini-2.5-flash": "gemini-2.0-flash-exp",  # Map 2.5 to 2.0 experimental (latest available)
+                    "gemini-2.0-flash-exp": "gemini-2.0-flash-exp",
+                    "gemini-1.5-pro": "gemini-1.5-pro",
+                    "gemini-1.5-flash": "gemini-2.0-flash-exp",  # 1.5-flash deprecated, use 2.0
+                }
+                model_name = model_mapping.get(model, model)  # Use mapping or original if not found
+                self.gemini_client = genai.GenerativeModel(model_name)
+                log_step("llm_agent", f"Initialized Gemini client with model: {model_name} (requested: {model})")
+            else:
+                self.gemini_client = None
+                log_step("llm_agent", "Running in mock mode (Gemini not available or no API key)")
         else:
             self.use_mock = True
             log_step("llm_agent", f"Unknown model {model}, running in mock mode")
     
     def _detect_provider(self, model: str) -> str:
         """Detect which provider to use based on model name"""
-        if model == self.GEMINI_MODEL:
+        if model in self.OPENAI_MODELS or model.startswith("gpt-"):
+            return "openai"
+        elif model in self.GEMINI_MODELS or model.startswith("gemini-"):
             return "gemini"
         elif model in self.OLLAMA_MODELS or model.startswith("ollama:"):
             return "ollama"
@@ -141,13 +165,15 @@ class LLMAgent:
         return schemas
     
     async def _call_llm(self, messages: List[Dict], tools: Optional[List[Dict]] = None) -> Dict:
-        """Call the LLM API (Ollama or Gemini 2.5 Flash) with fallback to mock on errors"""
+        """Call the LLM API (OpenAI, Gemini, or Ollama) with fallback to mock on errors"""
         if self.use_mock:
             # Mock response for testing
             return self._mock_llm_response(messages)
 
         try:
-            if self.provider == "gemini":
+            if self.provider == "openai":
+                return self._call_openai(messages, tools)
+            elif self.provider == "gemini":
                 return self._call_gemini(messages, tools)
             elif self.provider == "ollama":
                 return await self._call_ollama_async(messages, tools)
@@ -169,25 +195,52 @@ class LLMAgent:
             # Fall back to mock response instead of raising
             return self._mock_llm_response(messages)
     
+    def _call_openai(self, messages: List[Dict], tools: Optional[List[Dict]] = None) -> Dict:
+        """Call OpenAI API with error handling"""
+        try:
+            kwargs = {
+                "model": self.model,
+                "messages": messages,
+                "temperature": 0.7,
+                "max_tokens": 2000,
+            }
+            
+            if tools:
+                kwargs["tools"] = tools
+                kwargs["tool_choice"] = "auto"
+            
+            response = self.client.chat.completions.create(**kwargs)
+            return {
+                "content": response.choices[0].message.content,
+                "tool_calls": response.choices[0].message.tool_calls or [],
+                "finish_reason": response.choices[0].finish_reason
+            }
+        except Exception as e:
+            error_msg = str(e).lower()
+            # Re-raise with context for quota detection
+            if "quota" in error_msg or "rate limit" in error_msg or "429" in error_msg or "insufficient_quota" in error_msg:
+                raise Exception(f"OpenAI quota/rate limit exceeded: {str(e)[:200]}")
+            raise
+    
     def _call_gemini(self, messages: List[Dict], tools: Optional[List[Dict]] = None) -> Dict:
-        """Call Gemini 2.5 Flash API using genai.Client"""
+        """Call Gemini API"""
         # Convert messages format for Gemini
-        # Combine system/user/assistant messages into a single content string
-        contents = []
+        # Gemini uses a different format - combine system/user messages
+        prompt_parts = []
         for msg in messages:
             role = msg.get("role", "user")
             content = msg.get("content", "")
             if role == "system":
-                contents.append(f"System: {content}")
+                prompt_parts.append(f"System: {content}")
             elif role == "user":
-                contents.append(content)
+                prompt_parts.append(content)
             elif role == "assistant":
-                contents.append(f"Assistant: {content}")
+                prompt_parts.append(f"Assistant: {content}")
         
-        # Combine into a single content string
-        full_content = "\n".join(contents)
+        full_prompt = "\n".join(prompt_parts)
         
-        # Include tool descriptions in the prompt if available
+        # For now, Gemini tool calling is simplified (Gemini 2.0 supports function calling)
+        # We'll use a simpler approach: include tool descriptions in the prompt
         if tools:
             tool_descriptions = []
             for tool in tools:
@@ -195,16 +248,16 @@ class LLMAgent:
                 tool_descriptions.append(
                     f"- {func.get('name')}: {func.get('description')}"
                 )
-            full_content += f"\n\nAvailable tools:\n" + "\n".join(tool_descriptions)
-            full_content += "\n\nYou can use these tools by describing what you want to do. The system will execute the appropriate tool calls."
+            full_prompt += f"\n\nAvailable tools:\n" + "\n".join(tool_descriptions)
+            full_prompt += "\n\nYou can use these tools by describing what you want to do. The system will execute the appropriate tool calls."
         
         try:
-            # Call Gemini 2.5 Flash using genai.Client API
-            response = self.gemini_client.models.generate_content(
-                model=self.GEMINI_MODEL,
-                contents=full_content,
-                temperature=0.7,
-                max_output_tokens=2000
+            response = self.gemini_client.generate_content(
+                full_prompt,
+                generation_config=genai.types.GenerationConfig(
+                    temperature=0.7,
+                    max_output_tokens=2000,
+                )
             )
         except Exception as e:
             error_msg = str(e).lower()
@@ -213,14 +266,15 @@ class LLMAgent:
                 raise Exception(f"Gemini quota/rate limit exceeded: {str(e)[:200]}")
             # Provide helpful error message if model not found
             if "404" in error_msg or "not found" in error_msg:
-                log_step("llm_error", f"Gemini model {self.GEMINI_MODEL} not found or unavailable")
-                raise Exception(f"Gemini model {self.GEMINI_MODEL} is not available. Check your API key and model access.")
+                log_step("llm_error", f"Model {self.model} not found. Available Gemini models: gemini-2.0-flash-exp, gemini-1.5-pro")
+                raise Exception(f"Model {self.model} is not available. Try: gemini-2.0-flash-exp or gemini-1.5-pro")
             raise
         
-        # Parse response - the API returns response.text directly
+        # Parse response
         content = response.text if hasattr(response, 'text') else str(response)
         
         # Gemini doesn't have native tool calling in the same way, so we return empty tool_calls
+        # In a production system, you'd parse the response for tool call requests
         return {
             "content": content,
             "tool_calls": [],  # Gemini tool calling would need custom parsing

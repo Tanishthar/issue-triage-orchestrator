@@ -1,8 +1,0 @@
-{
-  "pr_id": "d7af195b",
-  "title": "[Triage] proposed fix - repeated complex calculation in audio buffer duration comput",
-  "body": "Automated triage: proposed fix sketch\\n\\nRepro summary: repeated complex calculation in audio buffer duration computation in CvCapture_MSMF::grabFrame()\nSeverity: medium\n\nHypothesis:\n  The issue is likely caused by unexpected state handling in feature code. To validate and fix quickly:\n  1) Add a focused unit test that reproduces the failing behavior (see attached test skeleton).\n  2) Run that test to confirm failure and reproduce stacktrace.\n  3) Add guards / input validation and/or catch the exception at the caller boundary.\n  4) Add a regression test to CI to prevent future regressions.\n\nSuggested code changes (high-level):\n  - Add validation checks where inputs are parsed / used.\n  - Replace direct dereference with safe checks or try/except to produce friendly error messages.\n  - If this is concurrency-related, introduce locking or move blocking I/O to background tasks.\n\nNotes:\n  - This is a sketch to guide the first quick iteration; further debugging with logs/stacktrace is recommended.\\n\\nRepro steps:\\n- repeated complex calculation in audio buffer duration computation in CvCapture_MSMF::grabFrame()",
-  "branch": "triage/proposed-fix-medium-opencv",
-  "created_at": "2025-11-09T05:47:06.265077",
-  "file_count": 1
-}
