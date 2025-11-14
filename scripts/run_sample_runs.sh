@@ -9,13 +9,13 @@ mkdir -p "$OUT_DIR"
 mkdir -p "$DRYPRS_DIR"
 
 declare -a ISSUES=(
-  "Repo: https://github.com/pcqpcq/open-source-android-apps |
-  Issue: 'bcdboot.exe failed with code -1073741510!'|
-  README : https://github.com/pcqpcq/open-source-android-apps/blob/master/README.md "
-  "Repo: https://github.com/tortuvshin/open-source-flutter-apps | 
-  Issue: 'App crashes on startup!' |
-  README : https://github.com/tortuvshin/open-source-flutter-apps/blob/main/README.md "
-  "Repo: https://github.com/opencv/opencv | 
+  "Repo: https://github.com/Tanishthar/music-control |
+  Issue: 'app fails to start'|
+  README : https://github.com/Tanishthar/music-control/blob/main/README.md "
+  "Repo: https://github.com/Tanishthar/Python-Mini-Project | 
+  Issue: 'LLM API giving error code 429' |
+  README : https://github.com/Tanishthar/Python-Mini-Project/blob/main/README.md "
+  "Repo: https://github.com/Tanishthar/AI-ML-Projects | 
   Issue : 'repeated complex calculation in audio buffer duration computation in CvCapture_MSMF::grabFrame()' |
   README: https://github.com/opencv/opencv/blob/4.x/README.md "
 )
