@@ -9,15 +9,17 @@ mkdir -p "$OUT_DIR"
 mkdir -p "$DRYPRS_DIR"
 
 declare -a ISSUES=(
-  "Repo: https://github.com/Tanishthar/music-control |
-  Issue: 'app fails to start'|
-  README : https://github.com/Tanishthar/music-control/blob/main/README.md "
-  "Repo: https://github.com/Tanishthar/Python-Mini-Project | 
-  Issue: 'LLM API giving error code 429' |
-  README : https://github.com/Tanishthar/Python-Mini-Project/blob/main/README.md "
-  "Repo: https://github.com/Tanishthar/AI-ML-Projects | 
-  Issue : 'repeated complex calculation in audio buffer duration computation in CvCapture_MSMF::grabFrame()' |
-  README: https://github.com/opencv/opencv/blob/4.x/README.md "
+  "Repo: https://github.com/langflow-ai/langflow |
+  Issue: 'Support for Multi-Agent Orchestration Where a Main Agent Reads Shared Storage and Integrates Background Agent Outputs Into the Dialogue'|
+  README : https://github.com/langflow-ai/langflow/blob/main/README.md "
+  
+  "Repo: https://github.com/codecrafters-io/build-your-own-x | 
+  Issue: 'Broken Link for Python:Build a Reddit bot' |
+  README : https://github.com/codecrafters-io/build-your-own-x/blob/master/README.md "
+
+  "Repo: https://github.com/n8n-io/n8n | 
+  Issue : 'rootStore.restUrl always returns /rest → WebSockets fail with invalid URL' |
+  README: https://github.com/n8n-io/n8n/blob/master/README.md "
 )
 
 timestamp() { date +%Y%m%dT%H%M%S; }
@@ -28,12 +30,12 @@ for i in "${!ISSUES[@]}"; do
   mkdir -p "$RUN_DIR"
 
   ISSUE_ENTRY="${ISSUES[$i]}"
-  
-  # Parse the issue entry to extract repo_url, issue_text, and readme_file_path
-  # Format: "Repo: <url> | Issue: '<text>' | README : <url>"
-  # Use sed for portability (works on macOS and Linux)
+
+
   REPO_URL=$(echo "$ISSUE_ENTRY" | sed -n "s/.*Repo:\s*\([^|]*\).*/\1/p" | xargs)
+
   ISSUE_TEXT=$(echo "$ISSUE_ENTRY" | sed -n "s/.*Issue:\s*'\([^']*\)'.*/\1/p" | head -1)
+
   README_PATH=$(echo "$ISSUE_ENTRY" | sed -n "s/.*README\s*:\s*\([^|]*\).*/\1/p" | xargs)
   
   # Fallback if parsing fails

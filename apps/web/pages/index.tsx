@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:8000";
 // Construct WS URL from API_BASE if WS_BASE is not explicitly set
 const WS_BASE = process.env.NEXT_PUBLIC_WS_BASE || (API_BASE.replace(/^http/, "ws") + "/ws");
+// Get default model from environment variable (for Next.js, use NEXT_PUBLIC_ prefix)
+const DEFAULT_MODEL = process.env.NEXT_PUBLIC_DEFAULT_LLM_MODEL || "ollama:llama3.1";
 
 type Metrics = {
   generated_at?: string;
@@ -25,7 +27,7 @@ export default function DashboardPage() {
   const [repoUrl, setRepoUrl] = useState("");
   const [issueText, setIssueText] = useState("");
   const [readmePath, setReadmePath] = useState("");
-  const [selectedModel, setSelectedModel] = useState("ollama:llama3.1");
+  const [selectedModel, setSelectedModel] = useState(DEFAULT_MODEL);
 
   // Start a run by hitting POST /start
   async function startRun(e?: React.FormEvent) {
@@ -321,17 +323,13 @@ export default function DashboardPage() {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 bg-white"
               >
                 <option value="ollama:llama3.1">Llama 3.1 (Ollama - Local) - Default</option>
-                <option value="gpt-4o-mini">GPT-4o Mini (OpenAI)</option>
-                <option value="gemini-2.5-flash">Gemini 2.5 Flash (Google) - Maps to 2.0 Flash</option>
-                <option value="gemini-2.0-flash-exp">Gemini 2.0 Flash Experimental (Google)</option>
-                <option value="gemini-1.5-pro">Gemini 1.5 Pro (Google)</option>
+                <option value="ollama:gpt-oss:120b-cloud">gpt-oss:120b-cloud (Ollama - Local)</option>
                 <option value="ollama:llama3.2">Llama 3.2 (Ollama - Local)</option>
-                <option value="ollama:llama3.1">Llama 3.1 (Ollama - Local)</option>
                 <option value="ollama:mistral">Mistral (Ollama - Local)</option>
                 <option value="ollama:qwen2.5">Qwen 2.5 (Ollama - Local)</option>
               </select>
               <p className="mt-1 text-xs text-gray-500">
-                Choose the AI model for issue triage. Requires API keys: OPENAI_API_KEY for GPT models, GEMINI_API_KEY for Gemini models. For Ollama models, ensure Ollama is running locally at http://localhost:11434.
+                Choose the AI model for issue triage. Only Ollama models are supported. Ensure Ollama is running locally at http://localhost:11434.
               </p>
             </div>
 

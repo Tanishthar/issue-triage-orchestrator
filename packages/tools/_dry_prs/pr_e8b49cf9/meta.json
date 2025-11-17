@@ -1,8 +1,0 @@
-{
-  "pr_id": "e8b49cf9",
-  "title": "[Triage] proposed fix - Cannot use the library when running in linux environment",
-  "body": "Automated triage: proposed fix sketch\\n\\nThe root cause of the issue is likely due to the fact that the library's README file is an HTML document, which may not be properly handled by Linux environments. To fix this, we can modify the README file to use a more platform-agnostic format, such as Markdown or plain text. Alternatively, we can add a check in our code to handle cases where the README file is not properly parsed.\\n\\nRepro steps:\\n- Here is the numbered list of clear reproduction steps:\\n- Unfortunately, I don't see any clear reproduction steps in the issue description. However, here are some inferred reasonable steps based on the issue description:\\n- Set up a Linux environment (e.g., install a Linux distribution, set up a development environment).\\n- Clone or download the library repository.\\n- Run the library in your Linux environment.",
-  "branch": "triage/proposed-fix-medium-music-contro",
-  "created_at": "2025-11-14T06:52:59.118891",
-  "file_count": 1
-}

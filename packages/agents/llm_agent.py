@@ -23,6 +23,35 @@ from packages.agents.reliability import log_step
 from packages.agents.fix_proposer import extract_repro_steps as mock_extract_repro_steps, propose_fix_sketch as mock_propose_fix_sketch
 from packages.tools.mock_tool import mock_classify_issue
 
+# Try to import numpy for type checking
+try:
+    import numpy as np
+    NUMPY_AVAILABLE = True
+except ImportError:
+    NUMPY_AVAILABLE = False
+    np = None
+
+def safe_json_serialize(obj: Any) -> Any:
+    """Recursively convert numpy arrays and other non-serializable types to JSON-serializable formats"""
+    if NUMPY_AVAILABLE and isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, dict):
+        return {k: safe_json_serialize(v) for k, v in obj.items()}
+    elif isinstance(obj, (list, tuple)):
+        return [safe_json_serialize(item) for item in obj]
+    elif hasattr(obj, '__dict__'):
+        # Handle custom objects
+        try:
+            return str(obj)
+        except:
+            return repr(obj)
+    else:
+        try:
+            json.dumps(obj)  # Test if it's already serializable
+            return obj
+        except (TypeError, ValueError):
+            return str(obj)
+
 # Try to import httpx for Ollama API calls
 try:
     import httpx
@@ -31,21 +60,7 @@ except ImportError:
     HTTPX_AVAILABLE = False
     log_step("llm_agent", "httpx not available, Ollama support disabled")
 
-# Try to import OpenAI, fall back to mock if not available
-try:
-    import openai
-    OPENAI_AVAILABLE = True
-except ImportError:
-    OPENAI_AVAILABLE = False
-    log_step("llm_agent", "OpenAI not available, will use mock mode")
-
-# Try to import Google Gemini, fall back if not available
-try:
-    import google.generativeai as genai
-    GEMINI_AVAILABLE = True
-except ImportError:
-    GEMINI_AVAILABLE = False
-    log_step("llm_agent", "Gemini not available")
+# Only Ollama is supported - no other model providers
 
 
 class Tool:
@@ -58,7 +73,9 @@ class Tool:
     
     def call(self, **kwargs) -> Any:
         """Call the tool with given arguments"""
-        log_step("tool_call", f"Calling tool: {self.name} with args: {json.dumps(kwargs, default=str)}")
+        # Safely serialize kwargs for logging
+        safe_kwargs = safe_json_serialize(kwargs)
+        log_step("tool_call", f"Calling tool: {self.name} with args: {json.dumps(safe_kwargs, default=str)}")
         try:
             result = self.func(**kwargs)
             log_step("tool_result", f"Tool {self.name} succeeded: {str(result)[:200]}")
@@ -70,14 +87,15 @@ class Tool:
 
 
 class LLMAgent:
-    """LLM Agent with tool calling capabilities - supports OpenAI, Gemini, and Ollama"""
+    """LLM Agent with tool calling capabilities - supports Ollama only"""
     
     # Supported models
-    OPENAI_MODELS = ["gpt-4o-mini"]
-    GEMINI_MODELS = ["gemini-2.5-flash"]
-    OLLAMA_MODELS = ["ollama:llama3.1"]  # Format: ollama:model_name
+    OLLAMA_MODELS = ["ollama:gpt-oss:120b-cloud"]  # Format: ollama:model_name
     
-    def __init__(self, api_key: Optional[str] = None, model: str = "ollama:llama3.1", use_mock: bool = False, ollama_base_url: str = "http://127.0.0.1:11434"):
+    def __init__(self, api_key: Optional[str] = None, model: Optional[str] = None, use_mock: bool = False, ollama_base_url: str = "http://127.0.0.1:11434"):
+        # Get model from parameter, environment variable, or default
+        if model is None:
+            model = os.getenv("DEFAULT_LLM_MODEL", "ollama:llama3.1")
         self.model = model
         self.provider = self._detect_provider(model)
         self.tools: Dict[str, Tool] = {}
@@ -87,8 +105,7 @@ class LLMAgent:
         # Initialize based on provider
         if use_mock:
             self.use_mock = True
-            self.client = None
-            self.gemini_client = None
+            self.ollama_model = None
             log_step("llm_agent", "Running in mock mode (forced)")
         elif self.provider == "ollama":
             self.use_mock = not HTTPX_AVAILABLE
@@ -101,46 +118,13 @@ class LLMAgent:
             else:
                 self.ollama_model = None
                 log_step("llm_agent", "Running in mock mode (httpx not available for Ollama)")
-        elif self.provider == "openai":
-            self.api_key = api_key or os.getenv("OPENAI_API_KEY")
-            self.use_mock = not OPENAI_AVAILABLE or not self.api_key
-            if not self.use_mock:
-                openai.api_key = self.api_key
-                self.client = openai.OpenAI(api_key=self.api_key)
-                log_step("llm_agent", f"Initialized OpenAI client with model: {model}")
-            else:
-                log_step("llm_agent", "Running in mock mode (OpenAI not available or no API key)")
-        elif self.provider == "gemini":
-            self.api_key = api_key or os.getenv("GEMINI_API_KEY")
-            self.use_mock = not GEMINI_AVAILABLE or not self.api_key
-            if not self.use_mock:
-                genai.configure(api_key=self.api_key)
-                # Map user-friendly model names to actual Google API model names
-                # Google API model names: gemini-2.0-flash-exp, gemini-1.5-pro, gemini-pro
-                # Note: gemini-2.5-flash doesn't exist yet, using gemini-2.0-flash-exp as closest match
-                model_mapping = {
-                    "gemini-2.5-flash": "gemini-2.0-flash-exp",  # Map 2.5 to 2.0 experimental (latest available)
-                    "gemini-2.0-flash-exp": "gemini-2.0-flash-exp",
-                    "gemini-1.5-pro": "gemini-1.5-pro",
-                    "gemini-1.5-flash": "gemini-2.0-flash-exp",  # 1.5-flash deprecated, use 2.0
-                }
-                model_name = model_mapping.get(model, model)  # Use mapping or original if not found
-                self.gemini_client = genai.GenerativeModel(model_name)
-                log_step("llm_agent", f"Initialized Gemini client with model: {model_name} (requested: {model})")
-            else:
-                self.gemini_client = None
-                log_step("llm_agent", "Running in mock mode (Gemini not available or no API key)")
         else:
             self.use_mock = True
-            log_step("llm_agent", f"Unknown model {model}, running in mock mode")
+            log_step("llm_agent", f"Unknown model {model}, running in mock mode. Only Ollama models are supported.")
     
     def _detect_provider(self, model: str) -> str:
-        """Detect which provider to use based on model name"""
-        if model in self.OPENAI_MODELS or model.startswith("gpt-"):
-            return "openai"
-        elif model in self.GEMINI_MODELS or model.startswith("gemini-"):
-            return "gemini"
-        elif model in self.OLLAMA_MODELS or model.startswith("ollama:"):
+        """Detect which provider to use based on model name - only Ollama is supported"""
+        if model in self.OLLAMA_MODELS or model.startswith("ollama:"):
             return "ollama"
         else:
             return "unknown"
@@ -151,7 +135,7 @@ class LLMAgent:
         log_step("llm_agent", f"Registered tool: {tool.name}")
     
     def _get_tool_schemas(self) -> List[Dict]:
-        """Convert registered tools to OpenAI function calling format"""
+        """Convert registered tools to function calling format (OpenAI-compatible)"""
         schemas = []
         for tool in self.tools.values():
             schemas.append({
@@ -165,121 +149,22 @@ class LLMAgent:
         return schemas
     
     async def _call_llm(self, messages: List[Dict], tools: Optional[List[Dict]] = None) -> Dict:
-        """Call the LLM API (OpenAI, Gemini, or Ollama) with fallback to mock on errors"""
+        """Call the LLM API (Ollama only) with fallback to mock on errors"""
         if self.use_mock:
             # Mock response for testing
             return self._mock_llm_response(messages)
 
         try:
-            if self.provider == "openai":
-                return self._call_openai(messages, tools)
-            elif self.provider == "gemini":
-                return self._call_gemini(messages, tools)
-            elif self.provider == "ollama":
+            if self.provider == "ollama":
                 return await self._call_ollama_async(messages, tools)
             else:
+                log_step("llm_fallback", f"Unsupported provider {self.provider}, falling back to mock mode")
                 return self._mock_llm_response(messages)
         except Exception as e:
-            error_msg = str(e).lower()
-            # Check for quota/rate limit errors
-            is_quota_error = any(keyword in error_msg for keyword in [
-                "quota", "rate limit", "429", "insufficient_quota",
-                "billing", "exceeded", "limit exceeded"
-            ])
-
-            if is_quota_error:
-                log_step("llm_fallback", f"Quota/rate limit exceeded, falling back to mock mode. Error: {str(e)[:200]}")
-            else:
-                log_step("llm_fallback", f"LLM API call failed, falling back to mock mode. Error: {str(e)[:200]}")
+            log_step("llm_fallback", f"LLM API call failed, falling back to mock mode. Error: {str(e)[:200]}")
 
             # Fall back to mock response instead of raising
             return self._mock_llm_response(messages)
-    
-    def _call_openai(self, messages: List[Dict], tools: Optional[List[Dict]] = None) -> Dict:
-        """Call OpenAI API with error handling"""
-        try:
-            kwargs = {
-                "model": self.model,
-                "messages": messages,
-                "temperature": 0.7,
-                "max_tokens": 2000,
-            }
-            
-            if tools:
-                kwargs["tools"] = tools
-                kwargs["tool_choice"] = "auto"
-            
-            response = self.client.chat.completions.create(**kwargs)
-            return {
-                "content": response.choices[0].message.content,
-                "tool_calls": response.choices[0].message.tool_calls or [],
-                "finish_reason": response.choices[0].finish_reason
-            }
-        except Exception as e:
-            error_msg = str(e).lower()
-            # Re-raise with context for quota detection
-            if "quota" in error_msg or "rate limit" in error_msg or "429" in error_msg or "insufficient_quota" in error_msg:
-                raise Exception(f"OpenAI quota/rate limit exceeded: {str(e)[:200]}")
-            raise
-    
-    def _call_gemini(self, messages: List[Dict], tools: Optional[List[Dict]] = None) -> Dict:
-        """Call Gemini API"""
-        # Convert messages format for Gemini
-        # Gemini uses a different format - combine system/user messages
-        prompt_parts = []
-        for msg in messages:
-            role = msg.get("role", "user")
-            content = msg.get("content", "")
-            if role == "system":
-                prompt_parts.append(f"System: {content}")
-            elif role == "user":
-                prompt_parts.append(content)
-            elif role == "assistant":
-                prompt_parts.append(f"Assistant: {content}")
-        
-        full_prompt = "\n".join(prompt_parts)
-        
-        # For now, Gemini tool calling is simplified (Gemini 2.0 supports function calling)
-        # We'll use a simpler approach: include tool descriptions in the prompt
-        if tools:
-            tool_descriptions = []
-            for tool in tools:
-                func = tool.get("function", {})
-                tool_descriptions.append(
-                    f"- {func.get('name')}: {func.get('description')}"
-                )
-            full_prompt += f"\n\nAvailable tools:\n" + "\n".join(tool_descriptions)
-            full_prompt += "\n\nYou can use these tools by describing what you want to do. The system will execute the appropriate tool calls."
-        
-        try:
-            response = self.gemini_client.generate_content(
-                full_prompt,
-                generation_config=genai.types.GenerationConfig(
-                    temperature=0.7,
-                    max_output_tokens=2000,
-                )
-            )
-        except Exception as e:
-            error_msg = str(e).lower()
-            # Check for quota/rate limit errors
-            if "quota" in error_msg or "rate limit" in error_msg or "429" in error_msg or "exceeded" in error_msg:
-                raise Exception(f"Gemini quota/rate limit exceeded: {str(e)[:200]}")
-            # Provide helpful error message if model not found
-            if "404" in error_msg or "not found" in error_msg:
-                log_step("llm_error", f"Model {self.model} not found. Available Gemini models: gemini-2.0-flash-exp, gemini-1.5-pro")
-                raise Exception(f"Model {self.model} is not available. Try: gemini-2.0-flash-exp or gemini-1.5-pro")
-            raise
-        
-        # Parse response
-        content = response.text if hasattr(response, 'text') else str(response)
-        
-        # Gemini doesn't have native tool calling in the same way, so we return empty tool_calls
-        # In a production system, you'd parse the response for tool call requests
-        return {
-            "content": content,
-            "tool_calls": [],  # Gemini tool calling would need custom parsing
-            "finish_reason": "stop"
-        }
     
     def _test_port_connectivity(self, host: str, port: int, timeout: float = 2.0) -> bool:
         """Test if a port is reachable using socket (lower level than httpx)"""
@@ -358,6 +243,10 @@ class LLMAgent:
                     payload["tools"] = tools
                     # Some Ollama models may need tool_choice parameter
                     payload["tool_choice"] = "auto"
+                    tool_names = [t.get("function", {}).get("name", "unknown") for t in tools]
+                    log_step("llm_agent", f"Passing {len(tools)} tools to Ollama for function calling: {tool_names}")
+                else:
+                    log_step("llm_agent", "No tools available for this LLM call")
                 
                 # Make API call to Ollama
                 # Use asyncio.to_thread() to run synchronous httpx.Client in thread pool
@@ -390,8 +279,12 @@ class LLMAgent:
                 tool_calls = []
                 if "tool_calls" in message:
                     tool_calls = message["tool_calls"]
+                    log_step("llm_agent", f"Found {len(tool_calls)} tool calls in message")
                 elif "tool_calls" in result:
                     tool_calls = result["tool_calls"]
+                    log_step("llm_agent", f"Found {len(tool_calls)} tool calls in result")
+                else:
+                    log_step("llm_agent", "No tool calls in Ollama response")
 
                 # Convert Ollama tool calls to OpenAI format if needed
                 formatted_tool_calls = []
@@ -798,9 +691,17 @@ def test_regression_{severity}_{hash(issue_text) % 10000}():
             
             # Get tool schemas
             tool_schemas = self._get_tool_schemas()
+            if tool_schemas:
+                log_step("llm_reasoning", f"Available tools for LLM: {[t.get('function', {}).get('name', 'unknown') for t in tool_schemas]}")
 
             # Call LLM
             response = await self._call_llm(messages, tools=tool_schemas if tool_schemas else None)
+            
+            # Log if LLM returned tool calls
+            if response.get("tool_calls"):
+                log_step("llm_reasoning", f"LLM requested {len(response.get('tool_calls', []))} tool calls")
+            else:
+                log_step("llm_reasoning", "LLM did not request any tool calls")
             
             # Add assistant message
             assistant_msg = {"role": "assistant", "content": response.get("content")}
@@ -845,6 +746,7 @@ def test_regression_{severity}_{hash(issue_text) % 10000}():
                 
                 # Call the tool
                 try:
+                    log_step("tool_usage", f"Used tool: {func_name}")
                     tool = self.tools[func_name]
                     result = tool.call(**func_args)
                     
@@ -855,12 +757,13 @@ def test_regression_{severity}_{hash(issue_text) % 10000}():
                         "result": str(result)[:500]  # Truncate long results
                     })
                     
-                    # Add tool result to messages
+                    # Add tool result to messages - safely serialize result
+                    safe_result = safe_json_serialize(result)
                     messages.append({
                         "role": "tool",
                         "tool_call_id": tool_call.get("id"),
                         "name": func_name,
-                        "content": json.dumps(result, default=str)
+                        "content": json.dumps(safe_result, default=str)
                     })
                 except Exception as e:
                     error_msg = str(e)[:500]

@@ -15,6 +15,7 @@ def create_http_fetcher_tool() -> Tool:
     """Create a tool wrapper for HTTP fetcher"""
     def fetch_url(url: str) -> Dict[str, Any]:
         """Fetch content from a URL. Returns the fetched text and metadata."""
+        log_step("tool_usage", "Used tool: fetch_url")
         result = http_fetcher.fetch(url)
         return {
             "url": result["url"],
@@ -56,6 +57,7 @@ def create_vector_search_tool() -> Tool:
     
     def search_vector_store(query: str, top_k: int = 3) -> Dict[str, Any]:
         """Search the vector store for relevant documentation or code context."""
+        log_step("tool_usage", "Used tool: search_documentation")
         vs = get_vector_store()
         results = vs.search(query, top_k=top_k)
         return {
@@ -97,6 +99,7 @@ def create_executor_tool() -> Tool:
     """Create a tool wrapper for code executor/syntax checker"""
     def check_syntax(code: str) -> Dict[str, Any]:
         """Check if Python code has valid syntax. Does not execute the code."""
+        log_step("tool_usage", "Used tool: check_code_syntax")
         result = executor.syntax_check(code)
         return {
             "ok": result.get("ok", False),

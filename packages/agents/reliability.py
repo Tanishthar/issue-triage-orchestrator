@@ -86,7 +86,9 @@ def log_step(step_name, message):
     try:
         with open(LOG_FILE, "w", encoding="utf-8") as f:
             json.dump(logs, f, indent=2)
-    except Exception:
+    except Exception as e:
+        # Log the error but don't crash - use print as fallback
+        print(f"WARNING: Failed to write log entry to {LOG_FILE}: {e}")
         # If write fails, swallow (we don't want logging failure to crash system)
         pass
 

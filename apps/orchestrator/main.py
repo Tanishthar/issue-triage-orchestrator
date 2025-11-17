@@ -60,7 +60,7 @@ class OrchestratorState(BaseModel):
     repo_url: str
     issue_text: str
     readme_file_path: Optional[str] = None  # Optional: URL or local file path to README
-    model: Optional[str] = "ollama:llama3.1"  # LLM model to use: ollama:llama3.1 (default), gpt-4o-mini, gemini-2.0-flash-exp, etc.
+    model: Optional[str] = None  # LLM model to use. If not provided, uses DEFAULT_LLM_MODEL env var or "ollama:llama3.1" as fallback. Only Ollama models are supported.
     severity: Optional[str] = None
     repro_steps: Optional[List[str]] = None  # Changed from Optional[str] to Optional[List[str]]
     proposed_fix: Optional[str] = None
@@ -144,8 +144,12 @@ async def start_orchestration(state: OrchestratorState):
     try:
         log_step("start_orchestration", f"Received issue: {state.issue_text}")
         
-        # Get model from state or default
-        model = state.model or "ollama:llama3.1"
+        # Track all tool calls (both direct and LLM-initiated)
+        total_tool_calls = 0
+        log_step("tool_tracking", f"Initialized tool call counter: {total_tool_calls}")
+        
+        # Get model from state, environment variable, or default
+        model = state.model or os.getenv("DEFAULT_LLM_MODEL", "ollama:llama3.1")
         log_step("start_orchestration", f"Using LLM model: {model}")
 
         # Get Ollama base URL from environment or use default
@@ -171,6 +175,8 @@ async def start_orchestration(state: OrchestratorState):
                 if state.readme_file_path.startswith("http://") or state.readme_file_path.startswith("https://"):
                     # It's a URL
                     readme_url = state.readme_file_path
+                    log_step("tool_usage", "Used tool: fetch_url")
+                    total_tool_calls += 1
                     fetch_res = http_fetcher.fetch(readme_url)
                     readme_text = fetch_res["text"][:10000]  # trim for safety
                     readme_result = {"fetched": True, "from_cache": fetch_res["from_cache"], "len": len(readme_text), "source": "provided_url"}
@@ -189,6 +195,8 @@ async def start_orchestration(state: OrchestratorState):
                 # Auto-detect README URL from repo
                 readme_url = state.repo_url.rstrip("/") + "/raw/main/README.md"
                 try:
+                    log_step("tool_usage", "Used tool: fetch_url")
+                    total_tool_calls += 1
                     fetch_res = http_fetcher.fetch(readme_url)
                     readme_text = fetch_res["text"][:10000]  # trim for safety
                     readme_result = {"fetched": True, "from_cache": fetch_res["from_cache"], "len": len(readme_text), "source": "auto_detected"}
@@ -209,6 +217,8 @@ async def start_orchestration(state: OrchestratorState):
             
             # Optionally search vector store for relevant context
             try:
+                log_step("tool_usage", "Used tool: search_documentation")
+                total_tool_calls += 1
                 search_results = vs.search(state.issue_text[:200], top_k=2)
                 vector_search_results = [{"doc_id": doc_id, "score": score} for doc_id, score in search_results]
                 log_step("start_orchestration", f"Found {len(vector_search_results)} relevant docs in vector store")
@@ -244,8 +254,11 @@ You can use tools to:
 After gathering context, propose a fix sketch and generate a failing pytest test."""
             
             reasoning_result = await agent.reason_with_tools(reasoning_query, max_iterations=3)
+            llm_tool_calls_count = len(reasoning_result.get('tool_calls', []))
+            total_tool_calls += llm_tool_calls_count
             log_step("start_orchestration", f"LLM reasoning completed with {reasoning_result.get('iterations', 0)} iterations")
-            log_step("start_orchestration", f"Tool calls made: {len(reasoning_result.get('tool_calls', []))}")
+            log_step("start_orchestration", f"LLM tool calls made: {llm_tool_calls_count}")
+            log_step("start_orchestration", f"Total tool calls made: {total_tool_calls}")
 
             # Extract fix from reasoning or fall back to direct proposal
             if reasoning_result.get("answer"):
@@ -269,6 +282,8 @@ After gathering context, propose a fix sketch and generate a failing pytest test
         log_step("start_orchestration", "Generated fix sketch and failing test using LLM")
 
         # 5) syntax-check the generated failing test
+        log_step("tool_usage", "Used tool: check_code_syntax")
+        total_tool_calls += 1
         exec_check = executor.syntax_check(failing_test_code)
         log_step("start_orchestration", f"Executor check for generated test: {exec_check.get('message')}")
 
@@ -285,6 +300,9 @@ After gathering context, propose a fix sketch and generate a failing pytest test
         log_step("start_orchestration", f"Created dry-run PR: {state.pr_url}")
 
         state.status = "completed"
+        
+        # Log final tool call count
+        log_step("start_orchestration", f"Final total tool calls: {total_tool_calls}")
 
         metrics = eval_harness.compute_metrics()
         

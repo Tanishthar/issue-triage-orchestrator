@@ -13,6 +13,7 @@ services:
       - FASTAPI_HOST=0.0.0.0
       - FASTAPI_PORT=8000
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      # DEFAULT_LLM_MODEL can be set in .env file (e.g., DEFAULT_LLM_MODEL=ollama:llama3.1)
     extra_hosts:
       - "host.docker.internal:host-gateway"
     ports:
@@ -40,6 +41,7 @@ services:
     environment:
       - NEXT_PUBLIC_API_BASE=http://localhost:8000
       - NEXT_PUBLIC_WS_BASE=ws://localhost:8000/ws
+      # NEXT_PUBLIC_DEFAULT_LLM_MODEL can be set in .env file for frontend default model selection
     ports:
       - "3000:3000"
     depends_on:

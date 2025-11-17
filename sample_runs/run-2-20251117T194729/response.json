@@ -1,0 +1,53 @@
+{
+  "final_state": {
+    "repo_url": "https://github.com/codecrafters-io/build-your-own-x",
+    "issue_text": "Broken Link for Python:Build a Reddit bot",
+    "readme_file_path": "https://github.com/codecrafters-io/build-your-own-x/blob/master/README.md",
+    "model": null,
+    "severity": "low",
+    "repro_steps": [
+      "Open the repository’s README or documentation page that contains the “Python: Build a Reddit bot” link.",
+      "Click on the “Python: Build a Reddit bot” hyperlink.",
+      "Observe that the link redirects to a 404 Not Found error page (or otherwise fails to load).",
+      "Verify the URL displayed in the browser’s address bar to confirm it is incorrect or missing.",
+      "Optionally, copy the link URL and paste it into a new browser tab to see if the same error occurs."
+    ],
+    "proposed_fix": null,
+    "pr_url": "dry://pr/5da53e80",
+    "status": "completed"
+  },
+  "readme_result": {
+    "fetched": true,
+    "from_cache": true,
+    "len": 10000,
+    "source": "provided_url"
+  },
+  "executor_check": {
+    "ok": true,
+    "message": "Syntax OK"
+  },
+  "metrics": {
+    "generated_at": "2025-11-17T14:17:56.690861",
+    "steps_count": 87,
+    "unique_steps": 10,
+    "error_count": 0,
+    "tool_error_rate": 0.0,
+    "avg_errors_per_step": 0.0,
+    "eval_score": 100
+  },
+  "pr_result": {
+    "pr_id": "5da53e80",
+    "pr_path": "packages/tools/_dry_prs/pr_5da53e80",
+    "pr_url": "dry://pr/5da53e80",
+    "meta": {
+      "pr_id": "5da53e80",
+      "title": "[Triage] proposed fix - Broken Link for Python:Build a Reddit bot",
+      "body": "Automated triage: proposed fix sketch\\n\\nThe README contains a markdown hyperlink with the visible text \"Python: Build a Reddit bot\" but the URL it points to is incorrect (it leads to a 404 page). This is usually caused by a typo in the link target, a moved/renamed file, or an outdated relative path. The fix is to locate the markdown link in the README and replace the broken URL with the correct one that points to the actual Reddit‑bot tutorial or source file in the repository. If the tutorial lives in a sub‑directory (e.g., `docs/reddit_bot.md` or `reddit_bot/README.md`), the link should be updated to something like `[Python: Build a Reddit bot](https://github.com/<owner>/<repo>/blob/main/reddit_bot/README.md)`. After updating the README, commit the change and push it, so the link resolves to a page that returns HTTP 200.\n\nSteps:\n1. Open `README.md` in the repository.\n2. Find the line that contains `[Python: Build a Reddit bot]`.\n3. Verify the correct path to the Reddit‑bot documentation or code (e.g., by browsing the repo tree).\n4. Replace the broken URL with the correct absolute GitHub URL (or a proper relative link).\n5. Save, commit, and push the changes.\n\nThis will eliminate the 404 error and satisfy the test that checks the link’s validity.\\n\\nRepro steps:\\n- Open the repository’s README or documentation page that contains the “Python: Build a Reddit bot” link.\\n- Click on the “Python: Build a Reddit bot” hyperlink.\\n- Observe that the link redirects to a 404 Not Found error page (or otherwise fails to load).\\n- Verify the URL displayed in the browser’s address bar to confirm it is incorrect or missing.\\n- Optionally, copy the link URL and paste it into a new browser tab to see if the same error occurs.",
+      "branch": "triage/proposed-fix-low-build-your-o",
+      "created_at": "2025-11-17T14:17:56.571191",
+      "file_count": 1
+    }
+  },
+  "message": "Run completed with LLM agent.",
+  "llm_mode": "real"
+}

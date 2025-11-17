@@ -2,26 +2,22 @@
 
 ## Overview
 
-The Issue Triage Orchestrator now uses a **real LLM agent** with **multi-model support** (OpenAI GPT-4o-mini and Google Gemini models) with tool-driven reasoning capabilities. This replaces the previous mock-based severity classification and fix proposal logic.
+The Issue Triage Orchestrator now uses a **real LLM agent** with **Ollama support** for tool-driven reasoning capabilities. This replaces the previous mock-based severity classification and fix proposal logic.
 
 ## Supported Models
 
-### OpenAI Models
-- **gpt-4o-mini** (default) - Cost-effective, fast
-- gpt-4o - More capable
-- gpt-4-turbo - High performance
-- gpt-3.5-turbo - Legacy option
-
-### Google Gemini Models
-- **gemini-2.5-flash** - Latest flash model (primary)
-- gemini-2.0-flash-exp - Experimental flash model (fallback)
-- gemini-1.5-pro - More capable, slower
+### Ollama Models
+- **ollama:llama3.1** (default) - Fast, capable local model
+- ollama:llama3.2 - Latest Llama model
+- ollama:mistral - Mistral model via Ollama
+- ollama:qwen2.5 - Qwen model via Ollama
+- Any other model available in your Ollama installation
 
 ### Model Selection
 Users can select the model via the frontend dropdown. The system automatically:
-- Detects the provider (OpenAI vs Gemini) based on model name
-- Uses the appropriate API key (OPENAI_API_KEY or GEMINI_API_KEY)
-- Falls back to mock mode if API key is missing
+- Detects Ollama models based on the "ollama:" prefix
+- Connects to local Ollama instance (default: http://127.0.0.1:11434)
+- Falls back to mock mode if Ollama is not running or unavailable
 
 ## Architecture
 
@@ -29,8 +25,8 @@ Users can select the model via the frontend dropdown. The system automatically:
 
 1. **LLM Agent** (`packages/agents/llm_agent.py`)
    - Core agent class with tool calling support
-   - Handles OpenAI API interactions
-   - Falls back to mock mode if API key unavailable
+   - Handles Ollama API interactions
+   - Falls back to mock mode if Ollama unavailable
    - Supports structured reasoning loops
 
 2. **Tool Wrappers** (`packages/agents/tool_wrappers.py`)
@@ -165,7 +161,7 @@ After gathering context, propose a fix sketch and generate a failing pytest test
 - **Token limits**: Max 2000 tokens per LLM call
 - **Max iterations**: 3-5 iterations for tool reasoning loops
 - **Timeout**: 5-minute timeout for API calls
-- **Model selection**: Defaults to `gpt-4o-mini` (cost-effective)
+- **Model selection**: Defaults to `ollama:llama3.1` (local, no API costs)
 
 ### Error Handling
 - **API failures**: Graceful fallback to mock mode
@@ -181,26 +177,34 @@ After gathering context, propose a fix sketch and generate a failing pytest test
 
 ## Mock Mode
 
-When `OPENAI_API_KEY` is not set or OpenAI is unavailable, the system runs in **mock mode**:
+When Ollama is not running or unavailable, the system runs in **mock mode**:
 
 - Uses heuristic-based severity classification
 - Uses simple pattern matching for repro steps
 - Uses template-based fix proposals
 - All tool calls still work (they're real tools, just no LLM)
 
-This allows development and testing without API costs.
+This allows development and testing without requiring Ollama to be running.
 
 ## Logging & Observability
 
-All LLM interactions are logged:
+All LLM interactions and tool usage are comprehensively logged:
 
+- **Tool usage**: `tool_usage` - Logs "Used tool: [tool_name]" before each tool execution
 - **Tool calls**: `tool_call` - Logs tool name and arguments
 - **Tool results**: `tool_result` - Logs successful tool execution
 - **Tool errors**: `tool_error` - Logs tool failures
 - **LLM reasoning**: `llm_reasoning` - Logs reasoning iterations
 - **LLM responses**: `llm_classify`, `llm_extract_repro`, `llm_propose_fix`
+- **Tool call counts**: Real-time count of tools called during reasoning
 
-Check `metrics/step_logs.json` for complete execution traces.
+**Available Tools (4 total)**:
+1. `fetch_url` - Fetches content from URLs (READMEs, documentation)
+2. `search_documentation` - Searches vector store for relevant context
+3. `check_code_syntax` - Validates Python code syntax
+4. Direct vector store search (used during README indexing)
+
+Check `metrics/step_logs.json` for complete execution traces. All tool invocations are logged with step name `tool_usage` for easy filtering.
 
 ## Example Run
 
@@ -215,9 +219,11 @@ See `scripts/run_llm_demo.py` for a complete demonstrable run that shows:
 
 ### Environment Variables
 
-- `OPENAI_API_KEY`: Your OpenAI API key (optional, enables real OpenAI LLM mode)
-- `GEMINI_API_KEY`: Your Google Gemini API key (optional, enables real Gemini LLM mode)
-- Model selection is done via the frontend UI or API request parameter
+- `OLLAMA_BASE_URL`: Ollama base URL (optional, defaults to http://127.0.0.1:11434)
+- `DEFAULT_LLM_MODEL`: Default Ollama model to use (optional, defaults to ollama:llama3.1)
+  - Examples: `ollama:llama3.1`, `ollama:llama3.2`, `ollama:mistral`, `ollama:gpt-oss:120b-cloud`
+  - For Next.js frontend, use `NEXT_PUBLIC_DEFAULT_LLM_MODEL` with the same value
+- Model selection can also be done via the frontend UI or API request parameter (overrides env var)
 
 ### Code Configuration
 
@@ -228,28 +234,28 @@ In `packages/agents/llm_agent.py`:
 
 ## Future Enhancements
 
-1. **Multi-model support**: Add Claude, local models (Ollama)
+1. **Additional Ollama models**: Support for more Ollama models
 2. **Streaming responses**: Real-time updates for better UX
-3. **Cost tracking**: Track token usage and costs
+3. **Performance tracking**: Track token usage and response times
 4. **Prompt optimization**: A/B test different prompts
-5. **Tool result caching**: Cache tool results to reduce API calls
+5. **Tool result caching**: Cache tool results to reduce network calls
 6. **Fine-tuning**: Fine-tune on issue triage datasets
 
 ## Troubleshooting
 
 ### LLM not working
-- Check `OPENAI_API_KEY` is set
-- Check API key is valid
-- Check network connectivity
+- Check Ollama is running: `curl http://127.0.0.1:11434/api/tags`
+- Check `OLLAMA_BASE_URL` is set correctly if using non-default location
+- Verify the model is available: `ollama list`
 - System will fall back to mock mode automatically
 
 ### Tool calls failing
 - Check tool logs in `metrics/step_logs.json`
 - Verify tool implementations are correct
-- Check for rate limiting
+- Check for network connectivity issues
 
-### High costs
-- Use `gpt-4o-mini` (default, cost-effective)
+### Performance issues
+- Use `ollama:llama3.1` (default, good balance)
 - Reduce `max_tokens` in agent config
 - Reduce `max_iterations` for tool reasoning
 - Enable HTTP fetcher caching

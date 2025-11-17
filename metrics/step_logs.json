@@ -1,347 +1,652 @@
 [
   {
-    "timestamp": "2025-11-14T06:52:12.651372",
-    "step": "start_orchestration",
-    "message": "Received issue: Cannot use the library when running in linux environment"
+    "timestamp": "2025-11-17T14:16:47.351154",
+    "step": "startup",
+    "message": "Ollama probe status: healthy - Ollama is reachable at http://host.docker.internal:11434"
   },
   {
-    "timestamp": "2025-11-14T06:52:12.687997",
+    "timestamp": "2025-11-17T14:17:00.649192",
     "step": "start_orchestration",
-    "message": "Using LLM model: ollama:llama3.1"
+    "message": "Received issue: Support for Multi-Agent Orchestration Where a Main Agent Reads Shared Storage and Integrates Background Agent Outputs Into the Dialogue"
   },
   {
-    "timestamp": "2025-11-14T06:52:12.773669",
+    "timestamp": "2025-11-17T14:17:00.653727",
+    "step": "tool_tracking",
+    "message": "Initialized tool call counter: 0"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:00.657749",
+    "step": "start_orchestration",
+    "message": "Using LLM model: ollama:gpt-oss:120b-cloud"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:00.661599",
     "step": "llm_agent",
-    "message": "Initialized Ollama client with model: llama3.1 (base_url: http://host.docker.internal:11434)"
+    "message": "Initialized Ollama client with model: gpt-oss:120b-cloud (base_url: http://host.docker.internal:11434)"
   },
   {
-    "timestamp": "2025-11-14T06:52:12.871619",
+    "timestamp": "2025-11-17T14:17:00.665564",
     "step": "llm_agent",
     "message": "Registered tool: fetch_url"
   },
   {
-    "timestamp": "2025-11-14T06:52:12.946422",
+    "timestamp": "2025-11-17T14:17:00.669532",
     "step": "llm_agent",
     "message": "Registered tool: search_documentation"
   },
   {
-    "timestamp": "2025-11-14T06:52:13.059056",
+    "timestamp": "2025-11-17T14:17:00.673257",
     "step": "llm_agent",
     "message": "Registered tool: check_code_syntax"
   },
   {
-    "timestamp": "2025-11-14T06:52:13.142838",
+    "timestamp": "2025-11-17T14:17:00.677571",
     "step": "tool_wrappers",
     "message": "Registered all tools with LLM agent"
   },
   {
-    "timestamp": "2025-11-14T06:52:13.236485",
+    "timestamp": "2025-11-17T14:17:00.680673",
     "step": "start_orchestration",
-    "message": "Initialized LLM agent with model ollama:llama3.1 (base_url: http://host.docker.internal:11434) and tools"
+    "message": "Initialized LLM agent with model ollama:gpt-oss:120b-cloud (base_url: http://host.docker.internal:11434) and tools"
   },
   {
-    "timestamp": "2025-11-14T06:52:13.258515",
+    "timestamp": "2025-11-17T14:17:00.684677",
+    "step": "llm_agent",
+    "message": "No tools available for this LLM call"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:00.689526",
     "step": "llm_agent",
     "message": "Making API call to http://host.docker.internal:11434/api/chat"
   },
   {
-    "timestamp": "2025-11-14T06:52:30.152665",
+    "timestamp": "2025-11-17T14:17:02.537242",
+    "step": "llm_agent",
+    "message": "No tool calls in Ollama response"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:02.553939",
     "step": "llm_classify",
-    "message": "Classified severity: medium"
+    "message": "Classified severity: low"
   },
   {
-    "timestamp": "2025-11-14T06:52:30.187103",
+    "timestamp": "2025-11-17T14:17:02.560577",
     "step": "start_orchestration",
-    "message": "Issue classified as medium by LLM"
+    "message": "Issue classified as low by LLM"
   },
   {
-    "timestamp": "2025-11-14T06:52:30.627829",
+    "timestamp": "2025-11-17T14:17:02.567828",
+    "step": "tool_usage",
+    "message": "Used tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:02.852565",
     "step": "start_orchestration",
-    "message": "Fetched README from provided URL (https://github.com/Tanishthar/music-control/blob/main/README.md) len=10000"
+    "message": "Fetched README from provided URL (https://github.com/langflow-ai/langflow/blob/main/README.md) len=10000"
   },
   {
-    "timestamp": "2025-11-14T06:52:30.689888",
+    "timestamp": "2025-11-17T14:17:02.882309",
     "step": "start_orchestration",
     "message": "Indexed README into vector store"
   },
   {
-    "timestamp": "2025-11-14T06:52:30.755909",
-    "step": "start_orchestration",
-    "message": "Found 1 relevant docs in vector store"
+    "timestamp": "2025-11-17T14:17:02.888238",
+    "step": "tool_usage",
+    "message": "Used tool: search_documentation"
   },
   {
-    "timestamp": "2025-11-14T06:52:30.779303",
+    "timestamp": "2025-11-17T14:17:02.894370",
+    "step": "start_orchestration",
+    "message": "Found 2 relevant docs in vector store"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:02.900797",
+    "step": "llm_agent",
+    "message": "No tools available for this LLM call"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:02.908631",
     "step": "llm_agent",
     "message": "Making API call to http://host.docker.internal:11434/api/chat"
   },
   {
-    "timestamp": "2025-11-14T06:52:35.540572",
-    "step": "llm_extract_repro",
-    "message": "Extracted 7 repro steps"
+    "timestamp": "2025-11-17T14:17:09.505373",
+    "step": "llm_agent",
+    "message": "No tool calls in Ollama response"
   },
   {
-    "timestamp": "2025-11-14T06:52:35.560598",
+    "timestamp": "2025-11-17T14:17:09.510267",
+    "step": "llm_extract_repro",
+    "message": "Extracted 10 repro steps"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:09.518047",
     "step": "start_orchestration",
     "message": "Extracted 5 repro steps using LLM"
   },
   {
-    "timestamp": "2025-11-14T06:52:35.580031",
+    "timestamp": "2025-11-17T14:17:09.521473",
     "step": "llm_reasoning",
     "message": "Iteration 1: Processing query"
   },
   {
-    "timestamp": "2025-11-14T06:52:35.609011",
+    "timestamp": "2025-11-17T14:17:09.525165",
+    "step": "llm_reasoning",
+    "message": "Available tools for LLM: ['fetch_url', 'search_documentation', 'check_code_syntax']"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:09.536333",
+    "step": "llm_agent",
+    "message": "Passing 3 tools to Ollama for function calling: ['fetch_url', 'search_documentation', 'check_code_syntax']"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:09.539593",
     "step": "llm_agent",
     "message": "Making API call to http://host.docker.internal:11434/api/chat"
   },
   {
-    "timestamp": "2025-11-14T06:52:49.291685",
+    "timestamp": "2025-11-17T14:17:11.575265",
+    "step": "llm_agent",
+    "message": "Found 1 tool calls in message"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:11.583836",
+    "step": "llm_reasoning",
+    "message": "LLM requested 1 tool calls"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:11.588387",
     "step": "llm_reasoning",
     "message": "Completed reasoning after 1 iterations"
   },
   {
-    "timestamp": "2025-11-14T06:52:49.341778",
+    "timestamp": "2025-11-17T14:17:11.591696",
     "step": "start_orchestration",
     "message": "LLM reasoning completed with 1 iterations"
   },
   {
-    "timestamp": "2025-11-14T06:52:49.359321",
+    "timestamp": "2025-11-17T14:17:11.594766",
     "step": "start_orchestration",
-    "message": "Tool calls made: 0"
+    "message": "LLM tool calls made: 0"
   },
   {
-    "timestamp": "2025-11-14T06:52:49.375034",
+    "timestamp": "2025-11-17T14:17:11.598484",
+    "step": "start_orchestration",
+    "message": "Total tool calls made: 2"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:11.601911",
+    "step": "llm_agent",
+    "message": "No tools available for this LLM call"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:11.605910",
     "step": "llm_agent",
     "message": "Making API call to http://host.docker.internal:11434/api/chat"
   },
   {
-    "timestamp": "2025-11-14T06:52:58.852269",
-    "step": "llm_parse_error",
-    "message": "JSON has control characters, attempting to fix: Invalid control character at: line 3 column 17 (char 423)"
+    "timestamp": "2025-11-17T14:17:29.150669",
+    "step": "llm_agent",
+    "message": "No tool calls in Ollama response"
   },
   {
-    "timestamp": "2025-11-14T06:52:58.925748",
+    "timestamp": "2025-11-17T14:17:29.156218",
     "step": "llm_propose_fix",
-    "message": "Generated fix sketch (385 chars) and test code (611 chars)"
+    "message": "Generated fix sketch (1912 chars) and test code (2811 chars)"
   },
   {
-    "timestamp": "2025-11-14T06:52:58.971276",
+    "timestamp": "2025-11-17T14:17:29.160350",
     "step": "start_orchestration",
     "message": "Generated fix sketch and failing test using LLM"
   },
   {
-    "timestamp": "2025-11-14T06:52:59.032055",
+    "timestamp": "2025-11-17T14:17:29.163881",
+    "step": "tool_usage",
+    "message": "Used tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:29.172736",
     "step": "start_orchestration",
     "message": "Executor check for generated test: Syntax OK"
   },
   {
-    "timestamp": "2025-11-14T06:52:59.325987",
+    "timestamp": "2025-11-17T14:17:29.192568",
     "step": "start_orchestration",
-    "message": "Created dry-run PR: dry://pr/e8b49cf9"
+    "message": "Created dry-run PR: dry://pr/32d62519"
   },
   {
-    "timestamp": "2025-11-14T06:54:20.198605",
+    "timestamp": "2025-11-17T14:17:29.196845",
     "step": "start_orchestration",
-    "message": "Received issue: adding to raboofs issue"
+    "message": "Final total tool calls: 3"
   },
   {
-    "timestamp": "2025-11-14T06:54:20.229613",
+    "timestamp": "2025-11-17T14:17:29.976620",
     "step": "start_orchestration",
-    "message": "Using LLM model: ollama:llama3.1"
+    "message": "Received issue: Broken Link for Python:Build a Reddit bot"
   },
   {
-    "timestamp": "2025-11-14T06:54:20.256976",
+    "timestamp": "2025-11-17T14:17:29.980942",
+    "step": "tool_tracking",
+    "message": "Initialized tool call counter: 0"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:29.983683",
+    "step": "start_orchestration",
+    "message": "Using LLM model: ollama:gpt-oss:120b-cloud"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:29.986509",
     "step": "llm_agent",
-    "message": "Initialized Ollama client with model: llama3.1 (base_url: http://host.docker.internal:11434)"
+    "message": "Initialized Ollama client with model: gpt-oss:120b-cloud (base_url: http://host.docker.internal:11434)"
   },
   {
-    "timestamp": "2025-11-14T06:54:20.281523",
-    "step": "llm_agent",
-    "message": "Registered tool: fetch_url"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:20.317673",
-    "step": "llm_agent",
-    "message": "Registered tool: search_documentation"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:20.351889",
-    "step": "llm_agent",
-    "message": "Registered tool: check_code_syntax"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:20.386031",
-    "step": "tool_wrappers",
-    "message": "Registered all tools with LLM agent"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:20.417552",
-    "step": "start_orchestration",
-    "message": "Initialized LLM agent with model ollama:llama3.1 (base_url: http://host.docker.internal:11434) and tools"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:20.451243",
-    "step": "llm_agent",
-    "message": "Making API call to http://host.docker.internal:11434/api/chat"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:22.256825",
-    "step": "llm_classify",
-    "message": "Classified severity: medium"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:22.287747",
-    "step": "start_orchestration",
-    "message": "Issue classified as medium by LLM"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:22.699337",
-    "step": "start_orchestration",
-    "message": "Fetched README from provided URL (https://github.com/opencv/opencv/blob/4.x/README.md) len=10000"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:22.772028",
-    "step": "start_orchestration",
-    "message": "Error: Object of type ndarray is not JSON serializable"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:32.207576",
-    "step": "start_orchestration",
-    "message": "Received issue: adding to raboofs issue"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:32.256405",
-    "step": "start_orchestration",
-    "message": "Using LLM model: ollama:llama3.1"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:32.316244",
-    "step": "llm_agent",
-    "message": "Initialized Ollama client with model: llama3.1 (base_url: http://host.docker.internal:11434)"
-  },
-  {
-    "timestamp": "2025-11-14T06:54:32.356939",
+    "timestamp": "2025-11-17T14:17:29.992423",
     "step": "llm_agent",
     "message": "Registered tool: fetch_url"
   },
   {
-    "timestamp": "2025-11-14T06:54:32.378182",
+    "timestamp": "2025-11-17T14:17:29.996338",
     "step": "llm_agent",
     "message": "Registered tool: search_documentation"
   },
   {
-    "timestamp": "2025-11-14T06:54:32.406218",
+    "timestamp": "2025-11-17T14:17:29.999385",
     "step": "llm_agent",
     "message": "Registered tool: check_code_syntax"
   },
   {
-    "timestamp": "2025-11-14T06:54:32.433103",
+    "timestamp": "2025-11-17T14:17:30.002443",
     "step": "tool_wrappers",
     "message": "Registered all tools with LLM agent"
   },
   {
-    "timestamp": "2025-11-14T06:54:32.454210",
+    "timestamp": "2025-11-17T14:17:30.008660",
     "step": "start_orchestration",
-    "message": "Initialized LLM agent with model ollama:llama3.1 (base_url: http://host.docker.internal:11434) and tools"
+    "message": "Initialized LLM agent with model ollama:gpt-oss:120b-cloud (base_url: http://host.docker.internal:11434) and tools"
   },
   {
-    "timestamp": "2025-11-14T06:54:32.488055",
+    "timestamp": "2025-11-17T14:17:30.012032",
+    "step": "llm_agent",
+    "message": "No tools available for this LLM call"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:30.015221",
     "step": "llm_agent",
     "message": "Making API call to http://host.docker.internal:11434/api/chat"
   },
   {
-    "timestamp": "2025-11-14T06:54:33.869638",
+    "timestamp": "2025-11-17T14:17:31.661266",
+    "step": "llm_agent",
+    "message": "No tool calls in Ollama response"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:31.668730",
     "step": "llm_classify",
-    "message": "Classified severity: medium"
+    "message": "Classified severity: low"
   },
   {
-    "timestamp": "2025-11-14T06:54:33.883473",
+    "timestamp": "2025-11-17T14:17:31.673087",
     "step": "start_orchestration",
-    "message": "Issue classified as medium by LLM"
+    "message": "Issue classified as low by LLM"
   },
   {
-    "timestamp": "2025-11-14T06:54:34.003254",
+    "timestamp": "2025-11-17T14:17:31.676503",
+    "step": "tool_usage",
+    "message": "Used tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:31.950092",
     "step": "start_orchestration",
-    "message": "Fetched README from provided URL (https://github.com/opencv/opencv/blob/4.x/README.md) len=10000"
+    "message": "Fetched README from provided URL (https://github.com/codecrafters-io/build-your-own-x/blob/master/README.md) len=10000"
   },
   {
-    "timestamp": "2025-11-14T06:54:34.066994",
+    "timestamp": "2025-11-17T14:17:31.979499",
     "step": "start_orchestration",
     "message": "Indexed README into vector store"
   },
   {
-    "timestamp": "2025-11-14T06:54:34.098249",
-    "step": "start_orchestration",
-    "message": "Found 1 relevant docs in vector store"
+    "timestamp": "2025-11-17T14:17:31.986036",
+    "step": "tool_usage",
+    "message": "Used tool: search_documentation"
   },
   {
-    "timestamp": "2025-11-14T06:54:34.129421",
+    "timestamp": "2025-11-17T14:17:31.992260",
+    "step": "start_orchestration",
+    "message": "Found 2 relevant docs in vector store"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:31.998490",
+    "step": "llm_agent",
+    "message": "No tools available for this LLM call"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:32.004161",
     "step": "llm_agent",
     "message": "Making API call to http://host.docker.internal:11434/api/chat"
   },
   {
-    "timestamp": "2025-11-14T06:54:36.307320",
+    "timestamp": "2025-11-17T14:17:37.413620",
+    "step": "llm_agent",
+    "message": "No tool calls in Ollama response"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:37.423811",
     "step": "llm_extract_repro",
-    "message": "Extracted 2 repro steps"
+    "message": "Extracted 5 repro steps"
   },
   {
-    "timestamp": "2025-11-14T06:54:36.329995",
+    "timestamp": "2025-11-17T14:17:37.429474",
     "step": "start_orchestration",
-    "message": "Extracted 2 repro steps using LLM"
+    "message": "Extracted 5 repro steps using LLM"
   },
   {
-    "timestamp": "2025-11-14T06:54:36.349233",
+    "timestamp": "2025-11-17T14:17:37.436800",
     "step": "llm_reasoning",
     "message": "Iteration 1: Processing query"
   },
   {
-    "timestamp": "2025-11-14T06:54:36.369550",
+    "timestamp": "2025-11-17T14:17:37.441978",
+    "step": "llm_reasoning",
+    "message": "Available tools for LLM: ['fetch_url', 'search_documentation', 'check_code_syntax']"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:37.449023",
+    "step": "llm_agent",
+    "message": "Passing 3 tools to Ollama for function calling: ['fetch_url', 'search_documentation', 'check_code_syntax']"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:37.454980",
     "step": "llm_agent",
     "message": "Making API call to http://host.docker.internal:11434/api/chat"
   },
   {
-    "timestamp": "2025-11-14T06:54:42.908558",
+    "timestamp": "2025-11-17T14:17:43.953307",
+    "step": "llm_agent",
+    "message": "Found 1 tool calls in message"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:43.965113",
+    "step": "llm_reasoning",
+    "message": "LLM requested 1 tool calls"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:43.968626",
     "step": "llm_reasoning",
     "message": "Completed reasoning after 1 iterations"
   },
   {
-    "timestamp": "2025-11-14T06:54:42.932862",
+    "timestamp": "2025-11-17T14:17:43.972087",
     "step": "start_orchestration",
     "message": "LLM reasoning completed with 1 iterations"
   },
   {
-    "timestamp": "2025-11-14T06:54:43.015967",
+    "timestamp": "2025-11-17T14:17:43.977587",
     "step": "start_orchestration",
-    "message": "Tool calls made: 0"
+    "message": "LLM tool calls made: 0"
   },
   {
-    "timestamp": "2025-11-14T06:54:43.036942",
+    "timestamp": "2025-11-17T14:17:43.981281",
+    "step": "start_orchestration",
+    "message": "Total tool calls made: 2"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:43.987437",
+    "step": "llm_agent",
+    "message": "No tools available for this LLM call"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:43.997384",
     "step": "llm_agent",
     "message": "Making API call to http://host.docker.internal:11434/api/chat"
   },
   {
-    "timestamp": "2025-11-14T06:54:56.338832",
-    "step": "llm_parse_error",
-    "message": "JSON has control characters, attempting to fix: Invalid control character at: line 2 column 380 (char 381)"
+    "timestamp": "2025-11-17T14:17:56.441500",
+    "step": "llm_agent",
+    "message": "No tool calls in Ollama response"
   },
   {
-    "timestamp": "2025-11-14T06:54:56.356241",
+    "timestamp": "2025-11-17T14:17:56.460792",
     "step": "llm_propose_fix",
-    "message": "Generated fix sketch (999 chars) and test code (812 chars)"
+    "message": "Generated fix sketch (1225 chars) and test code (1382 chars)"
   },
   {
-    "timestamp": "2025-11-14T06:54:56.371192",
+    "timestamp": "2025-11-17T14:17:56.487653",
     "step": "start_orchestration",
     "message": "Generated fix sketch and failing test using LLM"
   },
   {
-    "timestamp": "2025-11-14T06:54:56.389499",
+    "timestamp": "2025-11-17T14:17:56.523327",
+    "step": "tool_usage",
+    "message": "Used tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:56.543764",
     "step": "start_orchestration",
     "message": "Executor check for generated test: Syntax OK"
   },
   {
-    "timestamp": "2025-11-14T06:54:56.459526",
+    "timestamp": "2025-11-17T14:17:56.627592",
     "step": "start_orchestration",
-    "message": "Created dry-run PR: dry://pr/5c175911"
+    "message": "Created dry-run PR: dry://pr/5da53e80"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:56.657858",
+    "step": "start_orchestration",
+    "message": "Final total tool calls: 3"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:57.597863",
+    "step": "start_orchestration",
+    "message": "Received issue: Repo: https://github.com/n8n-io/n8n | \n  Issue : 'rootStore.restUrl always returns /rest ? WebSockets fail with invalid URL' |\n  README: https://github.com/n8n-io/n8n/blob/master/README.md "
+  },
+  {
+    "timestamp": "2025-11-17T14:17:57.615816",
+    "step": "tool_tracking",
+    "message": "Initialized tool call counter: 0"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:57.643031",
+    "step": "start_orchestration",
+    "message": "Using LLM model: ollama:gpt-oss:120b-cloud"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:57.663040",
+    "step": "llm_agent",
+    "message": "Initialized Ollama client with model: gpt-oss:120b-cloud (base_url: http://host.docker.internal:11434)"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:57.697218",
+    "step": "llm_agent",
+    "message": "Registered tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:57.725966",
+    "step": "llm_agent",
+    "message": "Registered tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:57.736321",
+    "step": "llm_agent",
+    "message": "Registered tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:57.746441",
+    "step": "tool_wrappers",
+    "message": "Registered all tools with LLM agent"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:57.764831",
+    "step": "start_orchestration",
+    "message": "Initialized LLM agent with model ollama:gpt-oss:120b-cloud (base_url: http://host.docker.internal:11434) and tools"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:57.780937",
+    "step": "llm_agent",
+    "message": "No tools available for this LLM call"
+  },
+  {
+    "timestamp": "2025-11-17T14:17:57.794685",
+    "step": "llm_agent",
+    "message": "Making API call to http://host.docker.internal:11434/api/chat"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:05.814627",
+    "step": "llm_agent",
+    "message": "No tool calls in Ollama response"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:05.828591",
+    "step": "llm_classify",
+    "message": "Classified severity: high"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:05.847173",
+    "step": "start_orchestration",
+    "message": "Issue classified as high by LLM"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:05.869253",
+    "step": "tool_usage",
+    "message": "Used tool: fetch_url"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:06.190038",
+    "step": "start_orchestration",
+    "message": "Fetched README from provided URL (https://github.com/n8n-io/n8n/blob/master/README.md) len=10000"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:06.200324",
+    "step": "start_orchestration",
+    "message": "Indexed README into vector store"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:06.203973",
+    "step": "tool_usage",
+    "message": "Used tool: search_documentation"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:06.207418",
+    "step": "start_orchestration",
+    "message": "Found 2 relevant docs in vector store"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:06.211333",
+    "step": "llm_agent",
+    "message": "No tools available for this LLM call"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:06.214531",
+    "step": "llm_agent",
+    "message": "Making API call to http://host.docker.internal:11434/api/chat"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:13.503157",
+    "step": "llm_agent",
+    "message": "No tool calls in Ollama response"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:13.509276",
+    "step": "llm_extract_repro",
+    "message": "Extracted 7 repro steps"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:13.513030",
+    "step": "start_orchestration",
+    "message": "Extracted 5 repro steps using LLM"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:13.516466",
+    "step": "llm_reasoning",
+    "message": "Iteration 1: Processing query"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:13.519647",
+    "step": "llm_reasoning",
+    "message": "Available tools for LLM: ['fetch_url', 'search_documentation', 'check_code_syntax']"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:13.525021",
+    "step": "llm_agent",
+    "message": "Passing 3 tools to Ollama for function calling: ['fetch_url', 'search_documentation', 'check_code_syntax']"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:13.528188",
+    "step": "llm_agent",
+    "message": "Making API call to http://host.docker.internal:11434/api/chat"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:15.062570",
+    "step": "llm_agent",
+    "message": "Found 1 tool calls in message"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:15.068821",
+    "step": "llm_reasoning",
+    "message": "LLM requested 1 tool calls"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:15.076090",
+    "step": "llm_reasoning",
+    "message": "Completed reasoning after 1 iterations"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:15.082987",
+    "step": "start_orchestration",
+    "message": "LLM reasoning completed with 1 iterations"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:15.089891",
+    "step": "start_orchestration",
+    "message": "LLM tool calls made: 0"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:15.097739",
+    "step": "start_orchestration",
+    "message": "Total tool calls made: 2"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:15.102105",
+    "step": "llm_agent",
+    "message": "No tools available for this LLM call"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:15.106635",
+    "step": "llm_agent",
+    "message": "Making API call to http://host.docker.internal:11434/api/chat"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:37.074297",
+    "step": "llm_agent",
+    "message": "No tool calls in Ollama response"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:37.080748",
+    "step": "llm_propose_fix",
+    "message": "Generated fix sketch (1885 chars) and test code (1717 chars)"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:37.084597",
+    "step": "start_orchestration",
+    "message": "Generated fix sketch and failing test using LLM"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:37.088209",
+    "step": "tool_usage",
+    "message": "Used tool: check_code_syntax"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:37.094093",
+    "step": "start_orchestration",
+    "message": "Executor check for generated test: Syntax OK"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:37.105626",
+    "step": "start_orchestration",
+    "message": "Created dry-run PR: dry://pr/8540b615"
+  },
+  {
+    "timestamp": "2025-11-17T14:18:37.109131",
+    "step": "start_orchestration",
+    "message": "Final total tool calls: 3"
   }
 ]

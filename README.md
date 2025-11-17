@@ -1,26 +1,29 @@
 # Minimal Multi-Agent Orchestrator — Issue Triage Workflow
 
 ### Owner: Tanish
-### Status: Completed through Phase 7 (LLM Integration). Now includes real LLM agent with tool-driven reasoning.
+### Status: ✅ Production Ready - Fully functional with Ollama integration, comprehensive logging, and robust error handling.
 
 ## Quick summary
 
 This repository implements a minimal multi-agent orchestrator for an Issue Triage workflow:
 - Input: GitHub repo + issue text
 - Workflow: **LLM-based** severity classification → repro extraction → fix proposer → failing unit test generation → dry-run PR creation (artifact)
-- Stack: FastAPI (orchestrator), Next.js + Tailwind (dashboard), **OpenAI LLM agent with tool calling**, typed state with Pydantic, reliability layer (retries, backoff, circuit-breaker), tools (safe HTTP fetcher, mock vector store, executor sandbox), evaluation harness, WebSocket live logs.
+- Stack: FastAPI (orchestrator), Next.js + Tailwind (dashboard), **Ollama LLM agent with tool calling**, typed state with Pydantic, reliability layer (retries, backoff, circuit-breaker), tools (safe HTTP fetcher, mock vector store, executor sandbox), evaluation harness, WebSocket live logs.
 
 ## Quickstart (one-command)
 
-1. Copy env and set API keys (optional, falls back to mock mode):
+1. Copy env (optional, falls back to mock mode if Ollama not running):
 ```bash
 cp .env.example .env
-# Add your API keys (at least one):
-# OPENAI_API_KEY=sk-...          # For GPT models
-# GEMINI_API_KEY=...             # For Gemini models
+# Optional: Set OLLAMA_BASE_URL if Ollama is not at default location
+# OLLAMA_BASE_URL=http://127.0.0.1:11434
+# Optional: Set DEFAULT_LLM_MODEL to specify which Ollama model to use
+# DEFAULT_LLM_MODEL=ollama:llama3.1
 ```
 
-**Note:** If no API keys are provided, the system runs in mock mode with heuristic-based responses. You can use either OpenAI or Gemini models independently.
+**Note:** The system uses Ollama models only. Ensure Ollama is running locally at http://localhost:11434. If Ollama is not available, the system runs in mock mode with heuristic-based responses.
+
+**Model Selection:** You can set the `DEFAULT_LLM_MODEL` environment variable to specify which Ollama model to use by default (e.g., `ollama:llama3.1`, `ollama:llama3.2`, `ollama:mistral`). If not set, it defaults to `ollama:llama3.1`. The model can also be changed via the frontend dropdown or API request.
 
 2. Build & run:
 ```bash
@@ -47,20 +50,19 @@ make up
 
 ## LLM Agent Integration
 
-The orchestrator now uses a **real LLM agent** (OpenAI) with tool-driven reasoning:
+The orchestrator now uses a **real LLM agent** (Ollama) with tool-driven reasoning:
 
 ### Features
-- **Multi-model support**: Choose between OpenAI (GPT-4o-mini) and Google Gemini models
+- **Ollama integration**: Uses local Ollama models for all LLM operations
 - **LLM-based classification**: Uses selected model to classify issue severity (low/medium/high/critical)
 - **LLM-based repro extraction**: Extracts reproduction steps from issue text
 - **Tool-driven reasoning**: Agent can call tools (HTTP fetcher, vector store, syntax checker) to gather context
 - **Fix proposal**: LLM generates fix sketches and failing test code
 - **Full observability**: All tool calls and reasoning steps are logged
-- **Model switching**: Frontend dropdown to switch between models on-the-fly
+- **Model switching**: Frontend dropdown to switch between Ollama models on-the-fly
 
 ### Supported Models
-- **OpenAI**: GPT-4o-mini (default), GPT-4o, GPT-4-turbo, GPT-3.5-turbo
-- **Google Gemini**: Gemini 2.0 Flash Experimental, Gemini 1.5 Flash, Gemini 1.5 Pro
+- **Ollama**: Llama 3.1 (default), Llama 3.2, Mistral, Qwen 2.5, and other Ollama models
 
 ### Tool Calling
 The LLM agent has access to these tools:
@@ -164,26 +166,104 @@ cat metrics/metrics.json
 
 ### Logging & Observability
 All tool calls are logged with:
+- **Tool usage logs**: Each tool logs "Used tool: [tool_name]" before execution
 - Tool name and arguments
 - Tool results (truncated to 500 chars)
 - Tool errors
 - LLM reasoning iterations
+- Real-time tool call counts
 - Full control loop visibility
 
-Check `metrics/step_logs.json` for complete execution trace.
+Check `metrics/step_logs.json` for complete execution trace. All tool invocations are tracked and logged for full observability.
 
 ### Budget Considerations
-- **Model**: Defaults to `gpt-4o-mini` (cost-effective)
-- **Max tokens**: 2000 per call (prevents runaway costs)
+- **Model**: Defaults to `ollama:llama3.1` (local, no API costs)
+- **Max tokens**: 2000 per call (prevents runaway processing)
 - **Max iterations**: 3-5 for tool reasoning (prevents loops)
-- **Caching**: HTTP fetcher uses cache to reduce API calls
-- **Mock mode**: No costs when API key not set
+- **Caching**: HTTP fetcher uses cache to reduce network calls
+- **Mock mode**: No costs when Ollama not running
+
+## Development Journey & Key Fixes
+
+### Migration to Ollama-Only Architecture
+The system was originally designed with multi-model support (OpenAI, Gemini, and Ollama). We migrated to **Ollama-only** for:
+- **Cost efficiency**: No API costs with local models
+- **Privacy**: All processing happens locally
+- **Reliability**: No dependency on external API services
+- **Simplicity**: Single model provider reduces complexity
+
+**Changes made:**
+- Removed all OpenAI and Gemini API integrations
+- Removed `openai` and `google-generativeai` dependencies
+- Updated frontend to show only Ollama models
+- Simplified model detection and initialization logic
+
+### Critical Bug Fixes
+
+#### 1. Numpy Array Serialization Error
+**Issue**: `Object of type ndarray is not JSON serializable` errors when vector store tried to persist or serialize data.
+
+**Root Cause**: Vector store was converting lists to numpy arrays when loading from disk, causing JSON serialization failures.
+
+**Solution**:
+- Modified vector store to keep vectors as lists in memory (not numpy arrays)
+- Convert to numpy arrays only on-the-fly during search computations
+- Added `safe_json_serialize()` helper function to handle numpy arrays recursively
+- Updated `_persist()` method to ensure all vectors are lists before saving
+
+**Files changed**: `packages/tools/vector_store.py`, `packages/agents/llm_agent.py`
+
+#### 2. Tool Calls Count Always Showing Zero
+**Issue**: Tool calls count always displayed as 0 even when tools were being used.
+
+**Root Cause**: Count was being calculated but not properly displayed in logs.
+
+**Solution**:
+- Fixed tool call history tracking in `reason_with_tools()` method
+- Ensured `tool_call_history` is properly populated and returned
+- Added explicit count calculation and logging
+
+**Files changed**: `apps/orchestrator/main.py`, `packages/agents/llm_agent.py`
+
+#### 3. Missing Tool Usage Logs
+**Issue**: No clear indication when tools were being called, making debugging difficult.
+
+**Solution**:
+- Added "Used tool: [tool_name]" log statements before each tool execution
+- Logs added for all 4 tools:
+  - `fetch_url` - when fetching README files
+  - `search_documentation` - when searching vector store
+  - `check_code_syntax` - when validating code syntax
+  - Direct tool calls in orchestrator also logged
+
+**Files changed**: `packages/agents/tool_wrappers.py`, `apps/orchestrator/main.py`, `packages/agents/llm_agent.py`
+
+### Environment Variable Support
+Added `DEFAULT_LLM_MODEL` environment variable for easy model configuration:
+- Set default model globally via `.env` file
+- Works across backend (Python) and frontend (Next.js with `NEXT_PUBLIC_` prefix)
+- Falls back to `ollama:llama3.1` if not set
+- Can still be overridden via frontend dropdown or API request
+
+**Files changed**: `packages/agents/llm_agent.py`, `apps/orchestrator/main.py`, `apps/web/pages/index.tsx`, `scripts/run_llm_demo.py`
+
+### Current Architecture Status
+✅ **Fully Functional**:
+- Ollama integration working reliably
+- All 4 tools properly logged and tracked
+- Real tool call counts displayed
+- Environment variable support
+- Comprehensive error handling
+- Mock mode fallback when Ollama unavailable
 
 ## Next Steps / Stretch Goals
 - ✅ LLM integration with tool calling
 - ✅ Tool-driven reasoning loop
 - ✅ Full observability of tool calls
-- 🔄 LLM swapping for token-cost optimization (Claude, local models)
+- ✅ Ollama-only architecture
+- ✅ Comprehensive tool logging
+- ✅ Environment variable configuration
+- 🔄 Streaming responses for better UX
 - 🔄 Tool result caching (local vector store)
 - 🔄 Canary run to detect performance degradation
-- 🔄 Streaming responses for better UX
+- 🔄 Additional Ollama model support

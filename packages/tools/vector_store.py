@@ -22,14 +22,13 @@ def _text_to_embedding(text: str, dim: int = 128) -> np.ndarray:
 class MockVectorStore:
     def __init__(self, dim: int = 128):
         self.dim = dim
-        self._index = {}  # id -> {"text":..., "vec": list}
+        self._index = {}  # id -> {"text":..., "vec": list} - always keep as list for JSON serialization
         if os.path.exists(STORE_PATH):
             try:
                 with open(STORE_PATH, "r", encoding="utf-8") as f:
                     raw = json.load(f)
-                # convert vec lists back to numpy arrays
-                for k,v in raw.items():
-                    v["vec"] = np.array(v["vec"])
+                # Keep vectors as lists (not numpy arrays) to avoid JSON serialization issues
+                # We'll convert to numpy arrays on-the-fly when needed for computation
                 self._index = raw
             except Exception:
                 self._index = {}
@@ -43,7 +42,13 @@ class MockVectorStore:
         qvec = _text_to_embedding(query, dim=self.dim)
         scores = []
         for doc_id, v in self._index.items():
-            vec = np.array(v["vec"])
+            # Convert list to numpy array on-the-fly for computation
+            vec_list = v.get("vec", [])
+            if isinstance(vec_list, list):
+                vec = np.array(vec_list)
+            else:
+                # Handle case where it might already be a numpy array (backward compatibility)
+                vec = np.array(vec_list) if not isinstance(vec_list, np.ndarray) else vec_list
             # cosine similarity
             sim = float(np.dot(qvec, vec) / (np.linalg.norm(qvec) * np.linalg.norm(vec)))
             scores.append((doc_id, sim))
@@ -51,7 +56,15 @@ class MockVectorStore:
         return scores[:top_k]
 
     def _persist(self):
-        # convert np arrays to lists for JSON
-        to_save = {k: {"text": v["text"], "vec": v["vec"]} for k,v in self._index.items()}
+        # Ensure all vectors are lists (not numpy arrays) for JSON serialization
+        to_save = {}
+        for k, v in self._index.items():
+            vec = v.get("vec", [])
+            # Convert numpy array to list if needed
+            if isinstance(vec, np.ndarray):
+                vec = vec.tolist()
+            elif not isinstance(vec, list):
+                vec = list(vec) if hasattr(vec, '__iter__') else []
+            to_save[k] = {"text": v.get("text", ""), "vec": vec}
         with open(STORE_PATH, "w", encoding="utf-8") as f:
             json.dump(to_save, f, indent=2)
